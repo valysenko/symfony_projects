@@ -1,0 +1,17 @@
+cd /var/www/symfony_projects/smartBookmark.ua/Symfony
+
+1. Create a bundle
+	php app/console generate:bundle --namespace=Acme/SmartBookmarkBundle --format=yml
+php app/console generate:bundle --namespace=Acme/TempBundle --format=yml
+2. Create database
+	php app/console doctrine:database:create
+3. Get/Set
+	php app/console doctrine:generate:entities Acme/SmartBookmarkBundle/Entity/
+4. Creating tables
+	php app/console doctrine:schema:update --force
+//
+ñâÿçè: http://odiszapc.ru/doctrine/working-with-associations/
+//
+
+Clear cash
+	php app/console cache:clear --env=prod --no-debug
