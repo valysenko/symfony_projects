@@ -1,0 +1,62 @@
+{% extends '::layout.html.twig' %}
+
+
+
+{% block menu %}
+    <div class="menu">
+        <div class="logo">
+            <br><br>
+            smartBookmark
+        </div>
+
+        <a href="{{ path('add_bookmark') }}" id="href">
+            <div class="elem">
+                <br><br><br><br><br>
+                Додавання
+            </div>
+        </a>
+
+        <a href="" id="href">
+            <div class="elem">
+                <br><br><br><br><br>
+                Видалення
+            </div>
+        </a>
+
+        <a href="" id="href">
+            <div class="elem">
+                <br><br><br><br><br>
+                Надіслати
+            </div>
+        </a>
+
+        <a href="{{ path('cabinet') }}" id="href">
+            <div class="elem">
+                <br><br><br><br><br>
+                Мої закладки
+            </div>
+        </a>
+
+
+        <div class="last_elem">
+
+        </div>
+
+
+
+
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="footer">
+        <br>Copyright 2014 © - web_guru
+    </div>
+{% endblock %}
+
+

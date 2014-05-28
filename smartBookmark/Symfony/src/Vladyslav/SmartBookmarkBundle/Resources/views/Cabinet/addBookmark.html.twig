@@ -1,0 +1,104 @@
+{% extends '::layout.html.twig' %}
+
+
+
+{% block menu %}
+    <div class="menu">
+        <div class="logo">
+            <br><br>
+            smartBookmark
+        </div>
+
+        <a href="{{ path('add_bookmark') }}" id="href">
+            <div class="elem">
+                <br><br><br><br><br>
+                Додавання
+            </div>
+        </a>
+
+        <a href="" id="href">
+            <div class="elem">
+                <br><br><br><br><br>
+                Видалення
+            </div>
+        </a>
+
+        <a href="" id="href">
+            <div class="elem">
+                <br><br><br><br><br>
+                Надіслати
+            </div>
+        </a>
+
+        <a href="{{ path('cabinet') }}" id="href">
+            <div class="elem">
+                <br><br><br><br><br>
+                Мої закладки
+            </div>
+        </a>
+
+
+        <div class="last_elem">
+
+        </div>
+
+
+
+
+    </div>
+{% endblock %}
+{#
+    adding form in content block
+#}
+{% block content %}
+    <div class="content">
+        <table class="add_table">
+            <tr class="tr_class">
+                <td>
+                    Додавання закладки
+                </td>
+            </tr>
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            <tr>
+                <td>
+                    {{ form_errors(form.name) }}
+                    {{ form_widget(form.name, {'attr': {'class': 'form_name','placeholder': "Назва: "}}) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    {{ form_errors(form.link) }}
+                    {{ form_widget(form.link, {'attr': {'class': 'form_name','placeholder': "URL: "}}) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    {{ form_errors(form.category) }}
+                    {{ form_widget(form.category, {'attr': {'class': 'form_name','placeholder': "Категорія: "}}) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  {{ form_widget(form.add,{'attr': {'class': 'add_button'}}) }}
+                </td>
+            </tr>
+
+            {{ form_end(form) }}
+
+        </table>
+
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="footer">
+        <br>Copyright 2014 © - web_guru
+    </div>
+{% endblock %}
+
+
