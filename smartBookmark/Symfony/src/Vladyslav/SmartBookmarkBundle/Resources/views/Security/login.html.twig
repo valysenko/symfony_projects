@@ -1,0 +1,67 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}SmartBookmark:login{% endblock %}
+
+{% block body %}
+    {% block content %}
+
+
+        <div align="center" class="login_block">
+
+        <form action="{{ path('check_path') }}" method="POST">
+
+            {#<a href="{{ path('index_page') }}">#}
+                <div class="security_logo">
+                    smartBookmark
+                </div>
+            {#</a>#}
+
+            <table class="security_table">
+                <tr style="height: 10px;"></tr>
+                <tr style="height: 10px;"></tr>
+
+                <tr>
+
+                    <td>
+                        <input type="text" class="input_login"  id="username" placeholder="Логін" name="_username" />
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <input type="password" class="input_login" id="password" placeholder="Пароль" name="_password" />
+                    </td>
+                </tr>
+                <tr>
+                    {% if error %}
+                      {{ error.message | replace({
+                            "Bad credentials": "Invalid username/password."
+                      })}}
+
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" class="add_button" id="enter_button" name="login" value="Вхід" />
+                    </td>
+                </tr>
+                <tr style="height: 10px;"></tr>
+                <tr style="height: 10px;"></tr>
+            </table>
+
+        </form>
+        </div>
+    {% endblock %}
+
+
+    <div id="container">
+
+
+
+
+
+
+    </div>
+{%endblock%}
+{% block footer %}
+{% endblock %}

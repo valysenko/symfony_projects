@@ -1,0 +1,83 @@
+.input_login{
+    height:25px;
+    width:170px;
+    border:1px solid #ccc;
+    border-radius:2px;
+    /*background:floralwhite;*/
+    margin-bottom:10px;
+
+}
+.enter_button{
+    height:25px;
+    width:170px;
+    background:blue ;
+}
+
+.login_block{
+    /*background-color: #BAEBEB;*/
+    margin: auto;
+    /*0*/
+    width:325px;
+    text-align:center;
+
+    margin-top:80px;
+    /*margin-bottom:-50px;*/
+
+    /*box-shadow: 0 0 10px rgba(100,100,100,0.5);*/
+
+}
+
+.security_logo{
+    font-size: 35px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+    text-shadow:1px 1px 1px rgba(255,255,255,0.75);
+    color:white;
+    display: table-cell;
+    vertical-align:bottom;
+    text-align: left;
+
+    padding-left:10px;
+
+    background:#ff6e22;
+    height:120px;
+    width:325px;
+
+    box-shadow: 0 0 5px rgba(100,100,100,0.5);
+}
+
+.security_table{
+    margin-top:5px;
+    background-color: ghostwhite;
+    width:325px;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(100,100,100,0.5);
+    border-top: 3px solid #ff6e22;
+
+}
+
+.login_block input[type=text], .login_block input[type=password],.login_block input[type=email]{
+    padding-left:5px;
+    font-size:15px;
+    width:250px ;
+    height:30px;
+    color: #ff6e22;
+    border:1px solid #ff6e22;
+}
+
+.add_button{
+    width:150px ;
+    height:30px;
+    background-color: #ff6e22;
+    border:1px dashed #ff6e22;
+    color:white;
+
+}
+
+.add_button:hover{
+    width:150px ;
+    height:30px;
+    background-color: #B22400;
+    border:1px dashed #FF9A64;
+    color:white;
+
+}

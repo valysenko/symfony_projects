@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="user")
  */
-class User implements UserInterface{
+class User implements UserInterface, \Serializable{
 
     /**
      * @ORM\Id
@@ -90,6 +90,24 @@ class User implements UserInterface{
     {
         $this->password = $value;
     }
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string salt
+     */
+    protected $salt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Role")
+     * @ORM\JoinTable(name="user_role",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+     * )
+     *
+     * @var ArrayCollection $userRoles
+     */
+    protected $userRoles;
 
     /**
      * Геттер для соли к паролю.
@@ -223,4 +241,28 @@ class User implements UserInterface{
     {
         return $this->email;
     }
+
+    /**
+     * Serializes the content of the current User object
+     * @return string
+     */
+    public function serialize()
+    {
+        return \json_encode(
+            array($this->username, $this->password, $this->salt,
+                $this->userRoles, $this->id));
+    }
+
+    /**
+     * Unserializes the given string in the current User object
+     * @param serialized
+     */
+    public function unserialize($serialized)
+    {
+        list($this->username, $this->password, $this->salt,
+            $this->userRoles, $this->id) = \json_decode(
+            $serialized);
+    }
+
+
 }

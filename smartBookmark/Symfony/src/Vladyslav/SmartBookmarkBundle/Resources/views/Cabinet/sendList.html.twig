@@ -16,11 +16,17 @@
             </div>
         </a>
 
-
-        <a href="{{ path('send_list') }}" id="href">
+        <a href="" id="href">
             <div class="elem">
                 <br><br><br><br><br>
-                Надіслати-
+                Видалення
+            </div>
+        </a>
+
+        <a href="" id="href">
+            <div class="elem">
+                <br><br><br><br><br>
+                Надіслати
             </div>
         </a>
 
@@ -28,13 +34,6 @@
             <div class="elem">
                 <br><br><br><br><br>
                 Мої закладки
-            </div>
-        </a>
-
-        <a href="{{ path('responsed_bookmarks') }}" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Надіслані
             </div>
         </a>
 
@@ -61,8 +60,8 @@
             {#{% if loop.index%2!=0 %}#}
                 {#<br>#}
             {#{% endif %}#}
-            <a href="{{ bookmark.getLink() }}" style="text-decoration:none;">
-            <div style="height:65px;width:150px;clear: both ; float:left;display:table-cell;vertical-align:middle; background:darkseagreen;margin:5px;text-align:center">
+            <a href="{{ path('send_bookmark', {'id':bookmark.getId()}) }}">
+            <div style="height:65px;width:150px;clear: both ;  background:darkseagreen;margin:5px; text-align:center;">
                 {{ bookmark.getName() }}
             </div>
              </a>

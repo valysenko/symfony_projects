@@ -17,10 +17,11 @@
         </a>
 
 
-        <a href="{{ path('send_list') }}" id="href">
+
+        <a href="" id="href">
             <div class="elem">
                 <br><br><br><br><br>
-                Надіслати-
+                Надіслати
             </div>
         </a>
 
@@ -57,16 +58,14 @@
 
 {% block content %}
     <div class="content">
-        {%  for bookmark in bookmarks %}
-            {#{% if loop.index%2!=0 %}#}
-                {#<br>#}
-            {#{% endif %}#}
-            <a href="{{ bookmark.getLink() }}" style="text-decoration:none;">
-            <div style="height:65px;width:150px;clear: both ; float:left;display:table-cell;vertical-align:middle; background:darkseagreen;margin:5px;text-align:center">
-                {{ bookmark.getName() }}
-            </div>
-             </a>
-        {% endfor %}
+        <div>
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email,{ 'attr':{'class':'input_login', 'placeholder':'Email'}}) }}
+            {{ form_widget(form.send,{ 'attr':{'class':'add_button', 'label':'Надіслати'}}) }}
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}
 

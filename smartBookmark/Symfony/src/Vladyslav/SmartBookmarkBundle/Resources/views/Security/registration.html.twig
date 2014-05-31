@@ -1,0 +1,80 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}SmartBookmark:login{% endblock %}
+
+{% block body %}
+    {% block content %}
+
+
+        <div align="center" class="login_block">
+
+           {#<a href="{{ path('index_page') }}">#}
+               <div class="security_logo">
+                    smartBookmark
+               </div>
+           {#</a>#}
+
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+                <table class="security_table">
+                    <tr style="height: 10px;"></tr>
+                    <tr style="height: 10px;"></tr>
+
+                    <tr>
+
+                        <td>
+                            {{ form_errors(form.username) }}
+                            {{ form_widget(form.username,{ 'attr':{'class':'input_login', 'placeholder':'Логін'}}) }}
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            {{ form_errors(form.password) }}
+                            {{ form_widget(form.password,{ 'attr':{'class':'input_login', 'placeholder':'Пароль'}}) }}
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            {{ form_errors(form.confirm_password) }}
+                            {{ form_widget(form.confirm_password,{ 'attr':{'class':'input_login', 'placeholder':'Підтвердження пароля'}}) }}
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            {{ form_errors(form.email) }}
+                            {{ form_widget(form.email,{ 'attr':{'class':'input_login', 'placeholder':'Email'}}) }}
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                             {{ form_widget(form.register,{ 'attr':{'class':'add_button', 'label':'Зареєструватися'}}) }}
+                         </td>
+                    </tr>
+                    <tr style="height: 10px;"></tr>
+                    <tr style="height: 10px;"></tr>
+                </table>
+            {{ form_end(form) }}
+        </form>
+        </div>
+    {% endblock %}
+
+
+    <div id="container">
+
+
+
+
+
+
+    </div>
+{%endblock%}
+{% block footer %}
+{% endblock %}
