@@ -15,6 +15,7 @@ use Vladyslav\SmartBookmarkBundle\Entity\Bookmark;
 class BookmarkType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options){
         $builder->add('name','text')
+            ->add('description','text')
             ->add('link','url')
             ->add('category','text',array('mapped'=>false))
             ->add('add','submit');

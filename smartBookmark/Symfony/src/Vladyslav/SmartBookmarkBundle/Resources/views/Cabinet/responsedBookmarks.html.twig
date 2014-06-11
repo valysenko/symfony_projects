@@ -1,79 +1,60 @@
 {% extends '::layout.html.twig' %}
 
 
-
-{% block menu %}
-    <div class="menu">
-        <div class="logo">
-            <br><br>
-            smartBookmark
-        </div>
-
-        <a href="{{ path('add_bookmark') }}" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Додавання
-            </div>
-        </a>
-
-
-        <a href="{{ path('send_list') }}" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Надіслати-
-            </div>
-        </a>
-
-        <a href="{{ path('cabinet') }}" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Мої закладки
-            </div>
-        </a>
-
-        <a href="{{ path('responsed_bookmarks') }}" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Надіслані
-            </div>
-        </a>
-
-
-        <div class="last_elem">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                Вітаємо, <span style="color:green">{{ app.user.username }}</span>
-            {% endif %}
-            <br>
-            <a href="{{ path('logout') }}" style="color:white;text-decoration: none">
-                Вихід
-            </a>
-        </div>
-
-
-
-
-    </div>
-{% endblock %}
-
 {% block content %}
     <div class="content">
-        {%  for bookmark in bookmarks %}
-            {#{% if loop.index%2!=0 %}#}
-                {#<br>#}
-            {#{% endif %}#}
-            <a href="{{ bookmark.getLink() }}" style="text-decoration:none;">
-            <div style="height:65px;width:150px;clear: both ; float:left;display:table-cell;vertical-align:middle; background:darkseagreen;margin:5px;text-align:center">
-                {{ bookmark.getName() }}
-            </div>
-             </a>
-        {% endfor %}
+        <div style="padding-top:10px;padding-left:5px; height:470px;width:10%;float:left;
+        border-right:7px solid rgba(214,211,210,0.5);">
+            <a href="{{ path('add_all') }}" class="category_name"><span>
+                        Додати всі
+                    </span></a><br>
+
+            <a href="{{ path('delete_all') }}" class="category_name"><span>
+                        Видалити всі
+                    </span></a><br>
+
+        </div>
+        <div style="float:left;width:85%;">
+            {% for bookmark in bookmarks %}
+
+                <div class="one">
+                    <table>
+                        <tr>
+                            <td class="bookmark_name">
+                                {{ bookmark.getName()|slice(0,28) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tr_hover">
+                                {{ bookmark.getDescription()|slice(0,145)}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <a href="{{ path('add_responsed_bookmark',{'id':bookmark.getId()}) }}">
+                                        <li>{% trans %}Додати {% endtrans %}</li>
+                                    </a>
+                                    <a href="{{ path('delete_responsed_bookmark',{'id':bookmark.getId()}) }}">
+                                        <li>{% trans %}Видалити {% endtrans %}</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            {% endfor %}
+            {% if quantityOfPages>1 %}
+                <div style="margin:auto;padding-top:20px;clear:both;text-align: center">
+                    {% for i in range(1, quantityOfPages+1) %}
+                        <a href="{{ path('responsed_bookmarks', {'page':i}) }}" class="paginator_link">{{ i }} </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
 
-{% block footer %}
-    <div class="footer">
-        <br>Copyright 2014 © - web_guru
-    </div>
-{% endblock %}
+
 
 

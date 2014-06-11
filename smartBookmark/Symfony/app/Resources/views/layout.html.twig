@@ -13,9 +13,100 @@
 
 
 <body>
+{% block languages %}
+    <table style="float: right; border:0px; margin-top:-2px;margin-bottom:-20px;">
+        <tr>
+            <td  style="text-decoration:none;color:white;">
+                <a href="{{ path('cabinet', {'_locale':'en'}) }}" style="text-decoration:none">
+                    <img src="/bundles/vladyslavsmartbookmark/images/England.png">
+                </a>
 
+                <a href="{{ path('cabinet', {'_locale':'ukr'}) }}" style="text-decoration:none">
+                    <img src="/bundles/vladyslavsmartbookmark/images/Ukraine.png">
+                </a>&nbsp;
+            </td>
+        </tr>
+    </table>
+{% endblock %}
 {% block menu %}
+    <table class="menu" style="clear: both">
 
+        <tr style="padding:0px;border:0px;">
+
+            <td class="logo" >
+                <a href ="{{ path('cabinet') }}" id="href">
+                    <div class="orange_logo"> smartBookmark</div>
+                </a>
+            </td>
+
+
+            <td></td>
+
+            <td class="elem">
+                <a href="{{ path('cabinet') }}" id="href">
+                    <div class="orange_button"> {% trans %}Мої закладки {% endtrans %}</div>
+                </a>
+            </td>
+
+
+            <td></td>
+
+            <td class="elem">
+                <a href="{{ path('add_bookmark') }}" id="href">
+                    <div class="orange_button">{% trans %}Додати {% endtrans %}</div>
+                </a>
+            </td>
+
+
+            <td></td>
+
+            <td class="elem">
+                <a href="{{ path('responsed_bookmarks') }}" id="href">
+                    <div class="orange_button"> {% trans %}Надіслані {% endtrans %} ({{ count }})
+                    </div>
+                </a>
+            </td>
+
+
+            <td></td>
+
+
+
+            <td class="elem">
+                <a href="{{ path('popular_bookmarks') }}" id="href">
+                    <div class="orange_button"> {% trans %}Популярні {% endtrans %}</div>
+                </a>
+            </td>
+
+
+
+
+            <td></td>
+
+            <td class="last_elem">
+                <div style="margin-bottom:25px;">
+                    {#<div>#}
+                    <ul style="padding: 0; margin: 0;">
+                        <a href="{{ path('logout') }}">
+                            <li>{% trans %}Вийти {% endtrans %}</li>
+                        </a>
+                        <a href="{{ path('user_edit') }}">
+                            <li>{% trans %}Редагувати {% endtrans %}</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class='my_nickname'>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <span style="color:#ffffff">{{ app.user.username }}</span>
+                    {% endif %}
+
+                </div>
+
+
+            </td>
+
+        </tr>
+    </table>
 {% endblock %}
 
 {% block content %}
@@ -23,9 +114,13 @@
 {% endblock %}
 
 {% block footer %}
-    <div class="footer_index">
-       Copyright 2014 © - web_guru
-    </div>
+    <table class="footer">
+        <tr>
+            <td>
+                Copyright 2014 © - web_guru
+            </td>
+        </tr>
+    </table>
 {% endblock %}
 {% block javascripts %}
     <script>

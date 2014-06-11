@@ -1,0 +1,57 @@
+{% extends '::layout.html.twig' %}
+
+
+{% block content %}
+    <div class="content">
+        {#{{ form_start(form) }}#}
+        {#{{ form_errors(form) }}#}
+        {#{{ form_end(form) }}#}
+        <table class="add_table">
+            <tr class="tr_class">
+                <td>
+                   {% trans %} Редагування користувача {% endtrans %}
+                </td>
+            </tr>
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            <tr>
+                <td>
+                    {{ form_errors(form.username) }}
+                    {{ form_widget(form.username, {'attr': {'class': 'form_name','value':username}}) }}
+                </td>
+            </tr>
+
+            {#<tr>#}
+                {#<td>#}
+                    {#{{ form_errors(form.password) }}#}
+                    {#{{ form_widget(form.password, {'attr': {'class': 'form_name','value':password}}) }}#}
+                {#</td>#}
+            {#</tr>#}
+
+            <tr>
+                <td>
+                    {{ form_errors(form.email) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form_name','value':email}}) }}
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td>
+                  {{ form_widget(form.save,{'attr': {'class': 'add_button'}}) }}
+                </td>
+            </tr>
+
+            {{ form_end(form) }}
+
+        </table>
+
+    </div>
+    </div>
+{% endblock %}
+
+
+
+

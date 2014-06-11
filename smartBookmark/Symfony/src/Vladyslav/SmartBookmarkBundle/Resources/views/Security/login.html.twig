@@ -3,6 +3,10 @@
 {% block title %}SmartBookmark:login{% endblock %}
 
 {% block body %}
+    {% block languages %}
+    {% endblock %}
+    {% block menu %}
+    {% endblock %}
     {% block content %}
 
 
@@ -12,8 +16,12 @@
 
             {#<a href="{{ path('index_page') }}">#}
                 <div class="security_logo">
-                    smartBookmark
+                    <a href ="{{ path('index_page') }}" id="href">
+                        <div class="orange_logo"> smartBookmark</div>
+                    </a>
                 </div>
+            <td class="logo" >
+
             {#</a>#}
 
             <table class="security_table">
@@ -23,28 +31,45 @@
                 <tr>
 
                     <td>
-                        <input type="text" class="input_login"  id="username" placeholder="Логін" name="_username" />
+                        <input type="text" class="input_login"  id="username" placeholder="{% trans %}Логін {% endtrans %}"
+                               name="_username" />
                     </td>
                 </tr>
                 <tr>
 
                     <td>
-                        <input type="password" class="input_login" id="password" placeholder="Пароль" name="_password" />
+                        <input type="password" class="input_login" id="password" placeholder="{% trans %}Пароль {% endtrans %}"
+                               name="_password" />
                     </td>
                 </tr>
                 <tr>
-                    {% if error %}
+                    <td style="color:red">{% if error %}
                       {{ error.message | replace({
-                            "Bad credentials": "Invalid username/password."
+                            'Bad credentials': 'Невірний логін/пароль'
                       })}}
 
                     {% endif %}
+                    </td>
+                </tr>
+                <tr style="height: 10px;">
+                    <td style="text-align:left;padding-left:35px;height:15px;">
+                        <a href="{{ path('restore_password') }}" style="color:#ff6e22; text-decoration:none"> {% trans %}Забули пароль? {% endtrans %}</a>
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="submit" class="add_button" id="enter_button" name="login" value="Вхід" />
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                                >
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <input type="submit" class="add_button" id="enter_button" name="login"
+                               value="{% trans %}Вхід {% endtrans %}" />
+                    </td>
+                </tr>
+
                 <tr style="height: 10px;"></tr>
                 <tr style="height: 10px;"></tr>
             </table>

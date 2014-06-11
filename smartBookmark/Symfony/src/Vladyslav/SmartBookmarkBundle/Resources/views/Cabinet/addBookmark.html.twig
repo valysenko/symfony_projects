@@ -1,52 +1,6 @@
 {% extends '::layout.html.twig' %}
 
 
-
-{% block menu %}
-    <div class="menu">
-        <div class="logo">
-            <br><br>
-            smartBookmark
-        </div>
-
-        <a href="{{ path('add_bookmark') }}" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Додавання
-            </div>
-        </a>
-
-
-        <a href="{{ path('send_list') }}" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Надіслати
-            </div>
-        </a>
-
-        <a href="{{ path('cabinet') }}" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Мої закладки
-            </div>
-        </a>
-
-        <a href="{{ path('responsed_bookmarks') }}" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Надіслані
-            </div>
-        </a>
-
-        <div class="last_elem">
-
-        </div>
-
-
-
-
-    </div>
-{% endblock %}
 {#
     adding form in content block
 #}
@@ -55,7 +9,7 @@
         <table class="add_table">
             <tr class="tr_class">
                 <td>
-                    Додавання закладки
+                    {% trans %}Додавання закладки {% endtrans %}
                 </td>
             </tr>
             {{ form_start(form) }}
@@ -64,21 +18,33 @@
             <tr>
                 <td>
                     {{ form_errors(form.name) }}
-                    {{ form_widget(form.name, {'attr': {'class': 'form_name','placeholder': "Назва: "}}) }}
+
+                    {{ form_widget(form.name,
+                    {'attr':
+                    {'class': 'form_name',
+                    'placeholder': 'Назва' }}) }}
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    {{ form_errors(form.description) }}
+                    {{ form_widget(form.description, {'attr': {'class': 'form_name','placeholder': "Опис"}}) }}
                 </td>
             </tr>
 
             <tr>
                 <td>
                     {{ form_errors(form.link) }}
-                    {{ form_widget(form.link, {'attr': {'class': 'form_name','placeholder': "URL: "}}) }}
+                    {{ form_widget(form.link, {'attr': {'class': 'form_name','placeholder': "URL"}}) }}
                 </td>
             </tr>
 
             <tr>
                 <td>
                     {{ form_errors(form.category) }}
-                    {{ form_widget(form.category, {'attr': {'class': 'form_name','placeholder': "Категорія: "}}) }}
+                    {{ form_widget(form.category, {'attr': {'class': 'form_name','placeholder': "Категорія"}}) }}
                 </td>
             </tr>
 
@@ -95,10 +61,5 @@
     </div>
 {% endblock %}
 
-{% block footer %}
-    <div class="footer">
-        <br>Copyright 2014 © - web_guru
-    </div>
-{% endblock %}
 
 

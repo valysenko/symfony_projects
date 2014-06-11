@@ -28,6 +28,7 @@
 }
 
 .security_logo{
+    opacity: 0.8;
     font-size: 35px;
     font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
     text-shadow:1px 1px 1px rgba(255,255,255,0.75);
@@ -46,6 +47,7 @@
 }
 
 .security_table{
+    opacity:0.85;
     margin-top:5px;
     background-color: ghostwhite;
     width:325px;

@@ -9,7 +9,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 class IndexController extends Controller{
-    public function indexAction(Request $request){
+    public function slashAction(Request $request){
+        return $this->redirect($this->generateUrl('index_page'));
+    }
+    public function indexAction(Request $request, $_locale){
         return $this->render('VladyslavSmartBookmarkBundle:Index:index.html.twig');
     }
 }

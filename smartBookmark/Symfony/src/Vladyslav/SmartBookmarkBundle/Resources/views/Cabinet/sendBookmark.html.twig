@@ -1,78 +1,42 @@
 {% extends '::layout.html.twig' %}
 
 
-
-{% block menu %}
-    <div class="menu">
-        <div class="logo">
-            <br><br>
-            smartBookmark
-        </div>
-
-        <a href="{{ path('add_bookmark') }}" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Додавання
-            </div>
-        </a>
-
-
-
-        <a href="" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Надіслати
-            </div>
-        </a>
-
-        <a href="{{ path('cabinet') }}" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Мої закладки
-            </div>
-        </a>
-
-        <a href="{{ path('responsed_bookmarks') }}" id="href">
-            <div class="elem">
-                <br><br><br><br><br>
-                Надіслані
-            </div>
-        </a>
-
-
-        <div class="last_elem">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                Вітаємо, <span style="color:green">{{ app.user.username }}</span>
-            {% endif %}
-            <br>
-            <a href="{{ path('logout') }}" style="color:white;text-decoration: none">
-                Вихід
-            </a>
-        </div>
-
-
-
-
-    </div>
-{% endblock %}
-
 {% block content %}
     <div class="content">
-        <div>
+        <table class="add_table">
+            <tr class="tr_class">
+                <td>
+                    {% trans %}Відправка закладки другу {% endtrans %}
+
+                </td>
+            </tr>
             {{ form_start(form) }}
             {{ form_errors(form) }}
-            {{ form_errors(form.email) }}
-            {{ form_widget(form.email,{ 'attr':{'class':'input_login', 'placeholder':'Email'}}) }}
-            {{ form_widget(form.send,{ 'attr':{'class':'add_button', 'label':'Надіслати'}}) }}
+
+            <tr>
+                <td>
+                    {{ form_errors(form.email) }}
+                    {{ form_widget(form.email,{ 'attr':{'class':'input_login', 'placeholder':'Email'}}) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    {{ form_widget(form.send,{ "attr":{"class":"add_button",
+                    'label':''}}) }}
+                </td>
+            </tr>
+
+
+
             {{ form_end(form) }}
-        </div>
+
+        </table>
+
+
     </div>
 {% endblock %}
 
-{% block footer %}
-    <div class="footer">
-        <br>Copyright 2014 © - web_guru
-    </div>
-{% endblock %}
+
 
 

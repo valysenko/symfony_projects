@@ -1,0 +1,63 @@
+{% extends '::layout.html.twig' %}
+
+
+{% block content %}
+    <div class="content">
+        <div style="padding-top:10px;padding-left:15px; height:470px;width:12%;float:left;overflow:scroll;">
+            <a href="{{ path('popular_bookmarks') }}" class="category_name"><span>
+                        Всі популярні
+                    </span></a><br>
+            {% for category in categories %}
+                <a href="{{ path('popular_bookmarks', {'category_id':category.getId()}) }}" class="category_name"> <span>
+                           {{ category.getName() }}
+
+                       </span></a>
+                <br>
+            {% endfor %}
+
+
+        </div>
+        <div style="float:left;width:85%;">
+        {%  for bookmark in bookmarks %}
+
+             <div class="one">
+                 <table>
+                     <tr>
+                         <td class="bookmark_name">
+                             {{ bookmark.getName()|slice(0,28) }}
+                         </td>
+                     </tr>
+                     <tr>
+                         <td class="tr_hover">
+                             {{ bookmark.getDescription()|slice(0,145) }}
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <ul>
+                                 <a href="{{ path('add_responsed_bookmark',{'id':bookmark.getId()}) }}">
+                                     <li>{% trans  %}Додати {% endtrans %}</li>
+                                 </a>
+                                 <a href="{{ path('delete_responsed_bookmark',{'id':bookmark.getId()}) }}">
+                                     <li>{% trans %}Видалити {% endtrans %}</li>
+                                 </a>
+                             </ul>
+                         </td>
+                     </tr>
+                 </table>
+            </div>
+        {% endfor %}
+         {#{% if quantityOfPages>1 %}#}
+        {#<div style="margin:auto;padding-top:20px;clear:both;text-align: center">#}
+            {#{% for i in range(1, quantityOfPages+1) %}#}
+                {#<a href="{{ path('responsed_bookmarks', {'page':i}) }}" class="paginator_link">{{ i }} </a>#}
+            {#{% endfor %}#}
+        {#</div>#}
+        {#{% endif %}#}
+    </div>
+        </div>
+{% endblock %}
+
+
+
+
