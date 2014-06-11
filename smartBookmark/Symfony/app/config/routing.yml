@@ -1,0 +1,10 @@
+vladyslav_smart_bookmark:
+    resource: "@VladyslavSmartBookmarkBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+check_path :
+    pattern:  /login_check
+logout:
+    pattern:  /logout
+slash_page:
+    pattern:  /
+    defaults: { _controller: VladyslavSmartBookmarkBundle:Index:slash}
