@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}SmartBookmark:login{% endblock %}
+  {#{% block menu %}#}
+  {#{% endblock %}#}
+{% block body %}
+        <div align="center" class="login_block">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <div class="page_label"> Registration</div>
+                <table class="security_table">
+
+                    <tr>
+
+                        <td>
+                            {{ form_errors(form.email) }}
+                            {{ form_widget(form.email,{ 'attr':{'class':'input_login', 'placeholder':'Email'}}) }}
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            {{ form_errors(form.password) }}
+                            {{ form_widget(form.password,{ 'attr':{'class':'input_login', 'placeholder':'Password'}}) }}
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                           <span style="font-size:14px; color:red;"> {{ error_message }} </span>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td>
+                             {{ form_widget(form.register,{ 'attr':{'class':'add_button', 'name':'Зареєструватися'}}) }}
+                         </td>
+                    </tr>
+
+                </table>
+            {{ form_end(form) }}
+        </form>
+        </div>
+        {#<table>#}
+            {#<tr>#}
+                {#<td style="vertical-position: ordinal">#}
+                    {#Copyright 2014 © - web_guru#}
+                {#</td>#}
+            {#</tr>#}
+        {#</table>#}
+    {% endblock %}

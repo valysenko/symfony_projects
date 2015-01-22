@@ -1,0 +1,16 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block body -%}
+    <div style="text-align:center">
+        <div class="page_label">Variant creation</div>
+        {{ form_start(form) }}
+        {{ form_widget(form.description, {'attr':{'placeholder':"Description"}}) }}<br>
+
+        {{ form_widget(form.quantityOfPoints, {'attr':{'placeholder':"Quantity Of Points"}}) }}<br>
+        {{ form_label(form.question) }}:
+        {{ form_widget(form.question) }}
+        {{ form_end(form) }}
+
+
+    </div>
+{% endblock %}

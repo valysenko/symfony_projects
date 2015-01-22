@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}simpleTestForm{% endblock %}</title>
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block stylesheets %}
+            {#<link rel="stylesheet" href="{{ asset('bundles/vladyslavsmartbookmark/css/index.css') }}"/>#}
+            {#<link rel="stylesheet" href="{{ asset('bundles/vladyslavsmartbookmark/css/cabinet.css') }}"/>#}
+            <link rel="stylesheet" href="{{ asset('bundles/vladyslavlysenkosimpletestform/css/style.css') }}"/>
+        {% endblock %}
+    </head>
+    <body>
+        {% block logout %}
+            <div align="right" style="color:darkslateblue;margin-right: 25px">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    Hi, <span style="color:green">{{ app.user.username }}</span>
+                {% endif %}
+                <br>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                    <a href="{{ path('logout') }}" style="color:red;text-decoration: none">
+                        Log out
+                    </a>
+                {% endif %}
+            </div>
+        {% endblock %}
+        {# menu for index page#}
+        {% block menu %}
+            <div class="menu_index">
+                <a href="{{ path('index') }}">Main</a> |
+                <a href="{{ path('registration_path')}}">Registration</a> |
+                <a href="{{ path('login_path')}}">Sign in</a>
+            </div>
+        {% endblock %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

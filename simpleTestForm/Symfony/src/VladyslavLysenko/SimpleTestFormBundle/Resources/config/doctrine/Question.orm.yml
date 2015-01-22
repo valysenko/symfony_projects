@@ -1,0 +1,32 @@
+VladyslavLysenko\SimpleTestFormBundle\Entity\Question:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        description:
+            type: string
+            length: 255
+        type:
+            type: string
+            length: 255
+        quantityOfAnswers:
+            type: integer
+            length: 255
+        mark:
+            type: integer
+    manyToOne:
+        test:
+           targetEntity: VladyslavLysenko\SimpleTestFormBundle\Entity\Test
+           inversedBy: questions
+    oneToMany:
+        variants:
+            targetEntity: VladyslavLysenko\SimpleTestFormBundle\Entity\Variant
+            mappedBy: question
+            cascade: [persist]
+            orphanRemoval: true
+    lifecycleCallbacks: {  }

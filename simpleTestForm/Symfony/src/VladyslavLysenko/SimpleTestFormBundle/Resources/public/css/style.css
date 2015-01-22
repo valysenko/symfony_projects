@@ -1,0 +1,91 @@
+html {
+    /*background: green;*/
+}
+
+.div_index{
+   text-align: center;
+    font-size:20px;
+    margin-bottom:10px;
+
+}
+
+.menu_index{
+   height:30px;
+   text-align:center;
+   font-size:18px;
+   margin-bottom:20px;
+   font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+
+.menu_index a{
+    text-decoration: none;
+    color:darkslategray;
+}
+
+.menu_index a:hover{
+    text-decoration: underline;
+    color:darkslategray;
+}
+
+.page_label{
+   text-align: center;
+    font-size:25px;
+    margin-bottom:10px;
+    color:#285e8e;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+
+.second_label{
+    font-size:20px;
+    color:#0088CC;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+
+.second_label a{
+    font-size:18px;
+    color:forestgreen;
+    text-decoration: none;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+
+.second_label a:hover{
+    font-size:18px;
+    color:forestgreen;
+    text-decoration: underline;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+
+
+.page_label input[type=text], .page_label input[type=password],.page_label input[type=email]{
+    padding-left:5px;
+    font-size:15px;
+    width:250px ;
+    height:30px;
+    color: #ff6e22;
+    border:1px solid #ff6e22;
+}
+
+
+.test{
+   margin:auto;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+    color:darkslategray;
+}
+.result{
+    text-align:center;
+    font-size:25px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+    color:forestgreen;
+}
+
+.edit_div form input[type=textarea]{
+    width:300px;
+    height:25px;
+    padding-left:5px;
+}
+
+
+
+
+
+

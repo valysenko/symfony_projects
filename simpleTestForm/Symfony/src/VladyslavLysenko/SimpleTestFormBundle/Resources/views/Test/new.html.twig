@@ -1,0 +1,16 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block body -%}
+
+    <div style="text-align:center">
+        <div class="page_label">Test creation</div>
+    {{ form_start(form) }}
+        {{ form_widget(form.description, {'attr':{'placeholder':"Description"}}) }}<br>
+        {{ form_widget(form.maxMark, {'attr':{'placeholder':"Maximum mark for test"}}) }}<br>
+        {{ form_widget(form.isactive) }}<br><br>
+    {{ form_end(form) }}
+    </div>
+
+
+</ul>
+{% endblock %}

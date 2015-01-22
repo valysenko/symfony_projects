@@ -1,0 +1,45 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block body -%}
+
+    <table class="record_properties" style="margin:auto">
+        <tbody>
+            <tr >
+                <td style="font-size:18px;color:darkslategray">
+                    Description:
+                </td>
+                <td style="font-size:18px;color:darkred">{{ entity.description }}</td>
+                </tr>
+            <tr>
+                <td style="font-size:18px;color:darkslategray">
+                    Maxmark:
+                </td>
+                <td style="font-size:18px;color:darkred">{{ entity.maxMark }}</td>
+
+            </tr>
+            <tr>
+
+                <td class="second_label">
+                    <a href="{{ path('question',{'id':entity.Id}) }}">
+                        List of questions
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td class="second_label">
+                    <a href="{{ path('test_edit', { 'id': entity.id }) }}">
+                        Edit
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ form(delete_form) }}
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</ul>
+{% endblock %}

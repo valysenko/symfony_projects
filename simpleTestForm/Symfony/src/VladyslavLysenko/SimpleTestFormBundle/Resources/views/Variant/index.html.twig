@@ -1,0 +1,30 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block body -%}
+    <div class="page_label">Variant list</div>
+
+    <table class="records_list" style="margin:auto">
+
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td style="font-size:18px;color:darkred;">{{ entity.description }}</td>
+                <td class="second_label">
+                 <a href="{{ path('variant_edit', {'question_id':id, 'id': entity.id }) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td style="height:10px"></td>
+        </tr>
+
+        <tr>
+            <td class="second_label">
+                <a href="{{ path('variant_new', {'id':id}) }}">
+                    Create new variant
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    {% endblock %}

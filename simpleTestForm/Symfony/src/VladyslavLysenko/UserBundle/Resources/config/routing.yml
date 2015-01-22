@@ -1,0 +1,13 @@
+vladyslav_lysenko_user_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: VladyslavLysenkoUserBundle:Default:index }
+login_path :
+    pattern:  /login
+    defaults: { _controller: VladyslavLysenkoUserBundle:Security:login}
+check_path :
+    pattern:  /login_check
+logout:
+    pattern:  /logout
+registration_path :
+    pattern:  /registration
+    defaults: { _controller: VladyslavLysenkoUserBundle:Security:registration }

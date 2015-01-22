@@ -1,0 +1,18 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block body -%}
+    <div style="text-align:center" class="edit_div">
+        <h1>Question edit</h1>
+        {{ form_start(edit_form) }}
+        {{ form_widget(edit_form.description, {'attr':{'placeholder':"Description"}}) }}<br>
+
+        {{ form_widget(edit_form.quantityOfAnswers, {'attr':{'placeholder':"Quantity Of Variants"}}) }}<br>
+        {{ form_widget(edit_form.mark, {'attr':{'placeholder':"Mark for question"}}) }}<br>
+        {{ form_label(edit_form.type) }}:
+        {{ form_widget(edit_form.type) }}<br>
+        {{ form_label(edit_form.test) }}:
+        {{ form_widget(edit_form.test) }}
+        {{ form_end(edit_form) }}
+         {{ form(delete_form) }}
+    </div>
+{% endblock %}

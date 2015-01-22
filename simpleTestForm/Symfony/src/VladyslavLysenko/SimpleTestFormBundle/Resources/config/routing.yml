@@ -1,0 +1,28 @@
+vladyslav_lysenko_simple_test_form_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: VladyslavLysenkoSimpleTestFormBundle:Default:index }
+_test:
+    resource: "@VladyslavLysenkoSimpleTestFormBundle/Resources/config/routing/test.yml"
+    prefix:   /admin/test
+_question:
+    resource: "@VladyslavLysenkoSimpleTestFormBundle/Resources/config/routing/question.yml"
+    prefix:   /admin/question
+_variant:
+    resource: "@VladyslavLysenkoSimpleTestFormBundle/Resources/config/routing/variant.yml"
+    prefix:   /admin/variant
+index:
+    pattern:  /
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Index:mainPage" }
+admin_index:
+    pattern:  /admin
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Admin:adminMainPage" }
+show_full_test:
+    pattern:  /show/{id}
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Index:showFullTest" }
+    requirements:
+        id: \d+
+results:
+    pattern:  /admin/show/results/{id}
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Admin:results" }
+    requirements:
+        id: \d+

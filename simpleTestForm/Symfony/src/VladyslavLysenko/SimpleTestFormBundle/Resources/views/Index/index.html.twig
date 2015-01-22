@@ -1,0 +1,22 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+    <div class="page_label">Test list</div>
+    <table class="records_list" style="margin:auto;">
+
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td class="second_label">{{ entity.description }}</td>
+                <td class="second_label">
+                    <a href="{{ path('show_full_test',{'id':entity.Id}) }}">
+                            pass the test
+                    </a>
+                 </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

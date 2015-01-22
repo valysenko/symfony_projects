@@ -1,0 +1,34 @@
+question:
+    pattern:  /{id}
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Question:index" }
+    requirements:
+        id:  \d+
+
+#question_show:
+#    pattern:  /{id}/show
+#    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Question:show" }
+
+question_new:
+    pattern:  /new
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Question:new" }
+
+question_create:
+    pattern:  /create
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Question:create" }
+    requirements: { _method: post }
+
+question_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Question:edit" }
+    requirements:
+            id: \d+
+
+question_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Question:update" }
+    requirements: { _method: post|put, id: \d+ }
+
+question_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Question:delete" }
+    requirements: { _method: post|delete, id: \d+ }

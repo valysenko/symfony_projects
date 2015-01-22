@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <div style="text-align:left; margin:auto; width:700px;">
+        <div style="font-size:25px;">
+            <div class="page_label"> Test:  {{ testName }}</div>
+        </div>
+        <br>
+        {% if result==null %}
+            <table class="test">
+            {{ form_start(form) }}
+                <tr>
+                    <td>
+                        {{ form_widget(form.name, {'attr':{'placeholder':"Enter your name "}}) }}<br><br>
+                    </td>
+                </tr>
+
+            {% for question in form.questions %}
+                <tr>
+                <td style="font-size:18px;">
+                    {#{{ form_label(question.description) }}#}
+                    {{form_widget( question.description) }}
+                 {{ loop.index }}.   {{  question.vars.data.description }}?
+                </td>
+                </tr>
+                <tr>
+                    <td>
+                     {{ form_widget(question.variants) }}<br>
+                    </td>
+                </tr>
+            {% endfor %}
+                <tr>
+                    <td>
+                        {{ form_end(form) }}
+                    </td>
+                </tr>
+
+                </table>
+        {% endif %}
+
+        {% if result!=null %}
+            <br>
+            <div class="result">
+                Your result: {{result}}<br> it is {{percents}} %
+            </div>
+        {% endif %}
+    </div>
+
+    {% endblock %}

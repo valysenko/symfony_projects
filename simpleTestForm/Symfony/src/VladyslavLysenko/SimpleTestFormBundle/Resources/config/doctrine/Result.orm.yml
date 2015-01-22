@@ -1,0 +1,21 @@
+VladyslavLysenko\SimpleTestFormBundle\Entity\Result:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        testId:
+            type: integer
+            column: test_id
+        name:
+            type: string
+            length: 255
+        mark:
+            type: integer
+        percents:
+            type: float
+    lifecycleCallbacks: {  }

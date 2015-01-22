@@ -1,0 +1,28 @@
+VladyslavLysenko\SimpleTestFormBundle\Entity\Test:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        description:
+            type: string
+            length: 255
+        maxMark:
+            type: string
+            length: 255
+        idUser:
+            type: integer
+        isActive:
+            type: integer
+    oneToMany:
+        questions:
+            targetEntity: VladyslavLysenko\SimpleTestFormBundle\Entity\Question
+            mappedBy: test
+            orphanRemoval: true
+#            cascade: [persist]
+    lifecycleCallbacks: {  }
+

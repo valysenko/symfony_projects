@@ -1,0 +1,26 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block body -%}
+
+    <div class="page_label"> Results:</div>
+    <table class="records_list" style="width:300px;margin:auto;">
+
+        <tbody>
+        {% if entities!=null %}
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.name }}</td>
+                <td>
+                    {{ entity.mark }}
+                </td>
+                <td>
+                    {{ entity.percents }} %
+                </td>
+            </tr>
+        {% endfor %}
+        {% endif %}
+
+        </tbody>
+    </table>
+
+    {% endblock %}

@@ -1,0 +1,39 @@
+variant:
+    pattern:  /{quastion_id}
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Variant:index" }
+    requirements:
+        quastion_id: \d+
+
+variant_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Variant:show" }
+    requirements:
+        id: \d+
+
+variant_new:
+    pattern:  /new/{id}
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Variant:create" }
+    requirements:
+            id: \d+
+
+#variant_create:
+#    pattern:  /create
+#    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Variant:create" }
+#    requirements: { _method: post }
+
+variant_edit:
+    pattern:  /{question_id}/{id}/edit
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Variant:edit" }
+    requirements:
+        id: \d+
+        question_id: \d+
+
+variant_update:
+    pattern:  /{id}/{question_id}/update
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Variant:update" }
+    requirements: { _method: post|put, id: \d+, question_id: \d+ }
+
+variant_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "VladyslavLysenkoSimpleTestFormBundle:Variant:delete" }
+    requirements: { _method: post|delete, id: \d+ }

@@ -1,0 +1,19 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block body %}
+
+    <div style="text-align:center">
+        <div class="page_label">Question creation</div>
+        {{ form_start(form) }}
+        {{ form_widget(form.description, {'attr':{'placeholder':"Description"}}) }}<br>
+
+        {{ form_widget(form.quantityOfAnswers, {'attr':{'placeholder':"Quantity Of Variants"}}) }}<br>
+        {{ form_widget(form.mark, {'attr':{'placeholder':"Mark for question"}}) }}<br>
+        {{ form_label(form.type) }}:
+        {{ form_widget(form.type) }}<br>
+        {{ form_label(form.test) }}:
+        {{ form_widget(form.test) }}
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

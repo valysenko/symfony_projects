@@ -1,0 +1,57 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block body -%}
+    <div class="page_label">Questions list</div>
+    <table class="records_list" style="margin:auto;max-width:1100px; "><br>
+        <tr style="text-align:center;background:gainsboro;">
+            <td style="font-size:20px;color:darkslategray;min-width:200px;max-width:300px;">
+                Description
+            </td>
+            <td style="font-size:20px;color:darkslategray;min-width:100px">
+                Type
+            </td>
+            <td style="font-size:20px;color:darkslategray;min-width:50px;text-align: center;">
+                Answers
+            </td>
+            <td style="font-size:20px;color:darkslategray;min-width:70px;text-align:center">
+                Max mark
+            </td>
+            <td style="font-size:20px;color:darkslategray;min-width:70px;text-align:center"></td>
+            <td style="font-size:20px;color:darkslategray;min-width:100px;text-align:center"></td>
+        </tr>
+        <tbody>
+        {% for entity in entities %}
+
+            <tr style="text-align:left">
+                <td style="font-size:18px;color:darkred">{{ entity.description }}</td>
+
+                <td style="font-size:18px;color:darkred">{{ entity.type }}</td>
+
+                <td style="font-size:18px;color:darkred;text-align:center">{{ entity.quantityOfAnswers }}</td>
+
+                <td style="font-size:18px;color:darkred;text-align:center">{{ entity.mark }}</td>
+
+                <td class="second_label" style="text-align:center">
+                    <a  href="{{ path('question_edit', { 'id': entity.id }) }}">edit</a>
+                </td>
+
+                <td class="second_label" style="text-align:center">
+                    <a  href="{{ path('variant', { 'quastion_id': entity.id }) }}">list of variants</a>
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td style="height:10px"></td>
+        </tr>
+        <tr>
+            <td class="second_label">
+               <a href="{{ path('question_new') }}">
+                  Create a new question
+               </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

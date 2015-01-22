@@ -1,0 +1,77 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}SimpleTestForm:login{% endblock %}
+
+{% block body %}
+
+    {#{% block menu %}#}
+    {#{% endblock %}#}
+    {% block content %}
+
+
+        <div align="center" class="login_block">
+
+        <form action="{{ path('check_path') }}" method="POST">
+
+
+            <div class="page_label"> Log in</div>
+            <table class="security_table">
+
+                <tr>
+
+                    <td>
+                        <input type="text" class="input_login"  id="username" placeholder="{% trans %}Email {% endtrans %}"
+                               name="_username" />
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <input type="password" class="input_login" id="password" placeholder="{% trans %}Password {% endtrans %}"
+                               name="_password" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color:red">{% if error %}
+                      {{ error.message | replace({
+                            'Bad credentials': 'Invalid login/password'
+                      })}}
+
+                    {% endif %}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                                >
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" class="add_button" id="enter_button" name="login"
+                               value="{% trans %}Sign in {% endtrans %}" />
+                    </td>
+                </tr>
+
+                <tr style="height: 10px;"></tr>
+                <tr style="height: 10px;"></tr>
+            </table>
+
+        </form>
+        </div>
+    {% endblock %}
+
+
+    <div id="container">
+
+
+
+
+
+
+    </div>
+{%endblock%}
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block body -%}
+    <div style="text-align:center">
+        <h1>Variant edit</h1>
+        {{ form_start(edit_form) }}
+        {{ form_widget(edit_form.description, {'attr':{'placeholder':"Description"}}) }}<br>
+
+        {{ form_widget(edit_form.quantityOfPoints, {'attr':{'placeholder':"Quantity Of Points"}}) }}<br>
+        {{ form_label(edit_form.question) }}:
+        {{ form_widget(edit_form.question) }}
+        {{ form_end(edit_form) }}
+
+    {{ form(delete_form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+VladyslavLysenko\SimpleTestFormBundle\Entity\Variant:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        description:
+            type: string
+            length: 255
+        quantityOfPoints:
+            type: integer
+    manyToOne:
+        question:
+            targetEntity: VladyslavLysenko\SimpleTestFormBundle\Entity\Question
+            inversedBy: variants
+    lifecycleCallbacks: {  }

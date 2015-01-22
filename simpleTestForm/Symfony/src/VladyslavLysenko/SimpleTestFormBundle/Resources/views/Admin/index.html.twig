@@ -1,0 +1,31 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block body -%}
+
+    <div class="page_label">My tests</div>
+    <table class="records_list" style="width:450px;margin:auto;">
+
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td class="second_label">{{ entity.description }}</td>
+                <td class="second_label">
+                    <a href="{{ path('test_show', { 'id': entity.id }) }}">show</a>
+                </td>
+                <td class="second_label">
+                    <a href="{{ path('test_edit', { 'id': entity.id }) }}">edit</a>
+                </td>
+                <td class="second_label">
+                    <a href="{{ path('results', { 'id': entity.id }) }}">results</a>
+                </td>
+                <td class="second_label">
+                    <a href="{{ path('question',{'id':entity.Id}) }}">
+                            List of questions
+                    </a>
+                 </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}
