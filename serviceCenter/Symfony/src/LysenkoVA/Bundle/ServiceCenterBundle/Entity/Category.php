@@ -2,6 +2,7 @@
 
 namespace LysenkoVA\Bundle\ServiceCenterBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +36,27 @@ class Category
      */
     private $minPrice;
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getServices()
+    {
+        return $this->services;
+    }
+
+    /**
+     * @param ArrayCollection $services
+     */
+    public function setServices($services)
+    {
+        $this->services = $services;
+    }
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Service",mappedBy="category")
+     */
+    private $services;
 
     /**
      * Get id

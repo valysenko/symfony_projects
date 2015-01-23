@@ -2,6 +2,7 @@
 
 namespace LysenkoVA\Bundle\ServiceCenterBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,7 +57,11 @@ class Client
      */
     private $email;
 
-
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Device",mappedBy="client")
+     */
+    private $devices;
     /**
      * Get id
      *
@@ -65,6 +70,22 @@ class Client
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getDevices()
+    {
+        return $this->devices;
+    }
+
+    /**
+     * @param ArrayCollection $devices
+     */
+    public function setDevices($devices)
+    {
+        $this->devices = $devices;
     }
 
     /**

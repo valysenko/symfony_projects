@@ -35,6 +35,28 @@ class MadeService
      */
     private $price;
 
+    /**
+     * @return Act
+     */
+    public function getAct()
+    {
+        return $this->act;
+    }
+
+    /**
+     * @param Act $act
+     */
+    public function setAct($act)
+    {
+        $this->act = $act;
+    }
+
+    /**
+     * @var Act
+     * @ORM\ManyToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Act",inversedBy="madeServices")
+     */
+    private $act;
+
 
     /**
      * Get id

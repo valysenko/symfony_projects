@@ -63,6 +63,49 @@ class Device
      */
     private $propertyOfSc;
 
+    /**
+     * @return Contract
+     */
+    public function getContract()
+    {
+        return $this->contract;
+    }
+
+    /**
+     * @param Contract $contract
+     */
+    public function setContract($contract)
+    {
+        $this->contract = $contract;
+    }
+
+    /**
+     * @var Contract
+     * @ORM\ManyToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Contract",inversedBy="devices")
+     */
+    private $contract;
+
+    /**
+     * @return Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
+
+    /**
+     * @var Client
+     * @ORM\ManyToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Client",inversedBy="devices")
+     */
+    private $client;
 
     /**
      * Get id

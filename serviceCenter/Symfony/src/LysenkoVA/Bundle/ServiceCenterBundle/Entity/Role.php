@@ -3,6 +3,8 @@
 namespace LysenkoVA\Bundle\ServiceCenterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Role\RoleInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Role
@@ -10,29 +12,35 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Role
+class Role implements RoleInterface
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @var integer $id
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      *
-     * @ORM\Column(name="name", type="string", length=10)
+     * @var string $name
      */
-    private $name;
-
+    protected $name;
 
     /**
-     * Get id
+     * @ORM\Column(type="datetime", name="created_at")
      *
-     * @return integer 
+     * @var DateTime $createdAt
+     */
+    protected $createdAt;
+
+    /**
+     * Геттер для id.
+     *
+     * @return integer The id.
      */
     public function getId()
     {
@@ -40,25 +48,61 @@ class Role
     }
 
     /**
-     * Set name
      *
-     * @param string $name
-     * @return Role
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
+     * @return string The name.
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Сеттер для названия роли.
+     *
+     * @param string $value The name.
+     */
+    public function setName($value)
+    {
+        $this->name = $value;
+    }
+
+    /**
+     * Геттер для даты создания роли.
+     *
+     * @return DateTime A DateTime object.
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Конструктор класса
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     *
+     * @return string The role.
+     */
+    public function getRole()
+    {
+        return $this->getName();
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Role
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 }

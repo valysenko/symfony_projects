@@ -37,6 +37,28 @@ class Service
 
 
     /**
+     * @var Category
+     * @ORM\ManyToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Category",inversedBy="services")
+     */
+    private $category;
+
+    /**
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param Category $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+    /**
      * Get id
      *
      * @return integer 

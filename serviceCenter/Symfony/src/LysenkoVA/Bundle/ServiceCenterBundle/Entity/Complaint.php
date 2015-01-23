@@ -35,6 +35,27 @@ class Complaint
      */
     private $text;
 
+    /**
+     * @return Department
+     */
+    public function getDepartment()
+    {
+        return $this->department;
+    }
+
+    /**
+     * @param Department $department
+     */
+    public function setDepartment($department)
+    {
+        $this->department = $department;
+    }
+
+    /**
+     * @var Department
+     * @ORM\ManyToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Department",inversedBy="complaints")
+     */
+    private $department;
 
     /**
      * Get id

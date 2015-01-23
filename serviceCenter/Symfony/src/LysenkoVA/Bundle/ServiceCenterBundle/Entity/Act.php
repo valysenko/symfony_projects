@@ -2,6 +2,7 @@
 
 namespace LysenkoVA\Bundle\ServiceCenterBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,6 +35,50 @@ class Act
      * @ORM\Column(name="sum", type="float")
      */
     private $sum;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\MadeService",mappedBy="act")
+     */
+    private $madeServices;
+
+    /**
+     * @var Contract
+     * @ORM\OneToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Contract",inversedBy="act")
+     */
+    private $contract;
+
+    /**
+     * @return Contract
+     */
+    public function getContract()
+    {
+        return $this->contract;
+    }
+
+    /**
+     * @param Contract $contract
+     */
+    public function setContract($contract)
+    {
+        $this->contract = $contract;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getMadeServices()
+    {
+        return $this->madeServices;
+    }
+
+    /**
+     * @param ArrayCollection $madeServices
+     */
+    public function setMadeServices($madeServices)
+    {
+        $this->madeServices = $madeServices;
+    }
 
 
     /**

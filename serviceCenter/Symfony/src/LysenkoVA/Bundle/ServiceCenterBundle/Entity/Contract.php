@@ -2,6 +2,7 @@
 
 namespace LysenkoVA\Bundle\ServiceCenterBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,6 +57,72 @@ class Contract
      */
     private $approximatePrice;
 
+    /**
+     * @var Employee
+     * @ORM\ManyToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Employee",inversedBy="contracts")
+     */
+    private $employee;
+
+    /**
+     * @var Act
+     * @ORM\OneToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Act",mappedBy="contract")
+     */
+    private $act;
+
+    /**
+     * @return Act
+     */
+    public function getAct()
+    {
+        return $this->act;
+    }
+
+    /**
+     * @param Act $act
+     */
+    public function setAct($act)
+    {
+        $this->act = $act;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getDevices()
+    {
+        return $this->devices;
+    }
+
+    /**
+     * @param ArrayCollection $devices
+     */
+    public function setDevices($devices)
+    {
+        $this->devices = $devices;
+    }
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Device",mappedBy="contract")
+     */
+    private $devices;
+
+
+    /**
+     * @return Employee
+     */
+    public function getEmployee()
+    {
+        return $this->employee;
+    }
+
+    /**
+     * @param Employee $employee
+     */
+    public function setEmployee($employee)
+    {
+        $this->employee = $employee;
+    }
 
     /**
      * Get id

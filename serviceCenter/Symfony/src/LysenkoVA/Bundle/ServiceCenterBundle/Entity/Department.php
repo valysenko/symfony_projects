@@ -2,6 +2,7 @@
 
 namespace LysenkoVA\Bundle\ServiceCenterBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +36,49 @@ class Department
      */
     private $telephoneNumber;
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getComplaints()
+    {
+        return $this->complaints;
+    }
+
+    /**
+     * @param ArrayCollection $complaints
+     */
+    public function setComplaints($complaints)
+    {
+        $this->complaints = $complaints;
+    }
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Complaint",mappedBy="department")
+     */
+    private $complaints;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getEmployees()
+    {
+        return $this->employees;
+    }
+
+    /**
+     * @param ArrayCollection $employees
+     */
+    public function setEmployees($employees)
+    {
+        $this->employees = $employees;
+    }
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Employee",mappedBy="department")
+     */
+    private $employees;
 
     /**
      * Get id
