@@ -1,12 +1,33 @@
 security:
+    encoders:
+                LysenkoVA\Bundle\ServiceCenterBundle\Entity\Employee:
+                        algorithm: sha512
+                        encode-as-base64: true
+                        iterations: 10
+    role_hierarchy:
+                ROLE_USER:  IS_AUTHENTICATED_ANONYMOUSLY
+                ROLE_ADMIN: ROLE_USER
     providers:
-        in_memory:
-            memory: ~
+               main:
+                   entity: { class: LysenkoVAServiceCenterBundle:Employee, property: username }
 
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+                main:
+                    pattern: /.*
+                    form_login:
+                        check_path: /login_check
+                        login_path: /login
+                        default_target_path: cabinet
+                        csrf_provider: form.csrf_provider
 
-        default:
-            anonymous: ~
+                    logout:
+                         path:   /logout
+                         target: /
+
+                    security: true
+                    anonymous: true
+
+    access_control:
+                    - { path: /admin, role: ROLE_USER }
+                    - { path: /.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+

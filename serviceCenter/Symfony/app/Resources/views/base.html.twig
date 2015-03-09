@@ -2,12 +2,96 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <title>Service center</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-theme.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('bundles/lysenkovaservicecenter/css/style.css') }}"/>
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        {% block body %}
+            {% block menu %}
+                <nav class="navbar navbar-default navbar-static-top">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Service center</a>
+                    </div>
+                    <div>
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Services</a></li>
+                        </ul>
+
+                        {% if is_granted('ROLE_USER') %}
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Statistics <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Actions <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <li><a href="#">Add employee</a></li>
+                                    {% endif %}
+                                    <li><a href="#">Create contract</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        {% endif %}
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li>
+                                {{ app.user.username }}
+                            </li>
+                            <li>
+                                <a href="{{ path('logout') }}" style="color:red;text-decoration: none">
+                                        Log out
+                                </a>
+                            </li>
+                            {% else %}
+                                    <li><a href="/login">Sign in</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    </div>
+                </nav>
+
+            {% endblock %}
+
+            {% block content %}
+            {% endblock %}
+
+            {% block footer %}
+                <div class="footer">
+                    Copyright 2015 © - Lysenko V.A.
+                </div>
+            {% endblock %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% javascripts 'jquery/jquery-2.0.3.min.js'
+            'bootstrap/js/bootstrap.js'%}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
     </body>
 </html>
+
+

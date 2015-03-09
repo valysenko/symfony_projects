@@ -135,4 +135,13 @@ class Department
     {
         return $this->telephoneNumber;
     }
+
+    /**
+     * Add userRoles
+     */
+    public function addEmployee(Employee $employee)
+    {
+        $this->employees[] = $employee;
+        return $this;
+    }
 }

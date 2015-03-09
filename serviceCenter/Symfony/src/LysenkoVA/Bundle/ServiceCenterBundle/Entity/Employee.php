@@ -4,7 +4,7 @@ namespace LysenkoVA\Bundle\ServiceCenterBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Role\Role;
+
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -26,7 +26,7 @@ class Employee implements UserInterface, \Serializable
         return \json_encode(
             array($this->username, $this->password, $this->salt,
                 $this->userRoles, $this->id,$this->contracts,
-                $this->department,$this->firstName,$this->lastName,$this->surname,
+                $this->department,$this->firstName,$this->surname,
                 $this->telephoneNumber));
     }
 
@@ -43,7 +43,7 @@ class Employee implements UserInterface, \Serializable
     {
         list($this->username, $this->password, $this->salt,
             $this->userRoles, $this->id,$this->contracts,
-            $this->department,$this->firstName,$this->lastName,$this->surname,
+            $this->department,$this->firstName,$this->surname,
             $this->telephoneNumber) = \json_decode(
             $serialized);
     }
@@ -112,12 +112,7 @@ class Employee implements UserInterface, \Serializable
      */
     private $firstName;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="last_name", type="string", length=20)
-     */
-    private $lastName;
+
 
     /**
      * @var string
@@ -302,28 +297,7 @@ class Employee implements UserInterface, \Serializable
         return $this->firstName;
     }
 
-    /**
-     * Set lastName
-     *
-     * @param string $lastName
-     * @return Employee
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
 
-        return $this;
-    }
-
-    /**
-     * Get lastName
-     *
-     * @return string 
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
 
     /**
      * Set surname
@@ -369,5 +343,14 @@ class Employee implements UserInterface, \Serializable
     public function getTelephoneNumber()
     {
         return $this->telephoneNumber;
+    }
+
+    /**
+     * Add userRoles
+     */
+    public function addUserRole(Role $userRoles)
+    {
+        $this->userRoles[] = $userRoles;
+        return $this;
     }
 }
