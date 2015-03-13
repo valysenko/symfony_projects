@@ -353,4 +353,10 @@ class Employee implements UserInterface, \Serializable
         $this->userRoles[] = $userRoles;
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->firstName." ".$this->surname;
+    }
+
 }

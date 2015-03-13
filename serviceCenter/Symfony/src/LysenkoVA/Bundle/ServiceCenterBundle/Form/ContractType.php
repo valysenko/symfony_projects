@@ -17,11 +17,14 @@ class ContractType extends AbstractType
         $builder
             ->add('number')
             ->add('description')
-            ->add('status')
+            ->add('status','choice', array(
+                'choices' => array(
+                    '1' => 'In progress',
+                    '0' => 'Ended'
+                )))
             ->add('dateOfEnd')
             ->add('approximatePrice')
-            ->add('employee')
-            ->add('act')
+            ->add('device', new DeviceType())
         ;
     }
     

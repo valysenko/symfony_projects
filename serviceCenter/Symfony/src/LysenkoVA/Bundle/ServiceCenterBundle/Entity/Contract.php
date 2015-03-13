@@ -51,6 +51,29 @@ class Contract
     private $dateOfEnd;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date")
+     */
+    private $date;
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
      * @var float
      *
      * @ORM\Column(name="approximate_price", type="float")
@@ -86,26 +109,26 @@ class Contract
     }
 
     /**
-     * @return ArrayCollection
+     * @ORM\OneToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Device",cascade={"persist"},orphanRemoval=true)
+     * @ORM\JoinColumn(name="device_id", referencedColumnName="id")
+     **/
+    private $device;
+
+    /**
+     * @return mixed
      */
-    public function getDevices()
+    public function getDevice()
     {
-        return $this->devices;
+        return $this->device;
     }
 
     /**
-     * @param ArrayCollection $devices
+     * @param mixed $device
      */
-    public function setDevices($devices)
+    public function setDevice($device)
     {
-        $this->devices = $devices;
+        $this->device = $device;
     }
-
-    /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Device",mappedBy="contract")
-     */
-    private $devices;
 
 
     /**

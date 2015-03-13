@@ -29,12 +29,7 @@ class Category
      */
     private $name;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="min_price", type="float")
-     */
-    private $minPrice;
+
 
     /**
      * @return ArrayCollection
@@ -91,26 +86,14 @@ class Category
         return $this->name;
     }
 
-    /**
-     * Set minPrice
-     *
-     * @param float $minPrice
-     * @return Category
-     */
-    public function setMinPrice($minPrice)
-    {
-        $this->minPrice = $minPrice;
 
+
+    /**
+     * Add userRoles
+     */
+    public function addService(Service $service)
+    {
+        $this->services[] = $service;
         return $this;
-    }
-
-    /**
-     * Get minPrice
-     *
-     * @return float 
-     */
-    public function getMinPrice()
-    {
-        return $this->minPrice;
     }
 }

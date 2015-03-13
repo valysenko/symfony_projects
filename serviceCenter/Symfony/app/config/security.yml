@@ -5,8 +5,9 @@ security:
                         encode-as-base64: true
                         iterations: 10
     role_hierarchy:
-                ROLE_USER:  IS_AUTHENTICATED_ANONYMOUSLY
-                ROLE_ADMIN: ROLE_USER
+                ROLE_MANAGER:  IS_AUTHENTICATED_ANONYMOUSLY
+                ROLE_MASTER: IS_AUTHENTICATED_ANONYMOUSLY
+                ROLE_ADMIN: ROLE_USER, ROLE_MANAGER
     providers:
                main:
                    entity: { class: LysenkoVAServiceCenterBundle:Employee, property: username }
@@ -28,6 +29,6 @@ security:
                     anonymous: true
 
     access_control:
-                    - { path: /admin, role: ROLE_USER }
+                    - { path: /admin, role: [ROLE_MANAGER, ROLE_MASTER] }
                     - { path: /.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
 

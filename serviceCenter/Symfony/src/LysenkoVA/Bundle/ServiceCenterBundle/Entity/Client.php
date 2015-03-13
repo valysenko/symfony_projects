@@ -29,12 +29,6 @@ class Client
      */
     private $firstName;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="last_name", type="string", length=20)
-     */
-    private $lastName;
 
     /**
      * @var string
@@ -111,28 +105,7 @@ class Client
         return $this->firstName;
     }
 
-    /**
-     * Set lastName
-     *
-     * @param string $lastName
-     * @return Client
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
 
-        return $this;
-    }
-
-    /**
-     * Get lastName
-     *
-     * @return string 
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
 
     /**
      * Set surname

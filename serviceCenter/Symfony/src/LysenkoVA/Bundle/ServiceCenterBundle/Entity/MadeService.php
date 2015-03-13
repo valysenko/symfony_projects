@@ -57,6 +57,26 @@ class MadeService
      */
     private $act;
 
+    /**
+     * @var string
+     */
+    private $comment;
+
+    /**
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string $comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    }
 
     /**
      * Get id

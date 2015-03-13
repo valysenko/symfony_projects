@@ -17,16 +17,26 @@
             {% block menu %}
                 <nav class="navbar navbar-default navbar-static-top">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">Service center</a>
+                        {% if is_granted('ROLE_MANAGER') %}
+                            <a class="navbar-brand" href="/admin">Service center</a>
+                        {%else %}
+                            <a class="navbar-brand" href="/">Service center</a>
+                        {% endif %}
                     </div>
                     <div>
                         <ul class="nav navbar-nav">
-                            <li><a href="#">Home</a></li>
+                            {% if is_granted('ROLE_MANAGER') %}
+                                <li><a href="/admin">Home</a></li>
+
+                            {%else %}
+                                <li><a href="/">Home</a></li>
+                            {% endif %}
+
                             <li><a href="#">About</a></li>
                             <li><a href="#">Services</a></li>
                         </ul>
 
-                        {% if is_granted('ROLE_USER') %}
+                        {% if is_granted('ROLE_MANAGER') %}
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Statistics <span class="caret"></span></a>
@@ -48,7 +58,7 @@
                                     {% if is_granted('ROLE_ADMIN') %}
                                     <li><a href="#">Add employee</a></li>
                                     {% endif %}
-                                    <li><a href="#">Create contract</a></li>
+                                    <li><a href="/admin/contract/new">Create contract</a></li>
                                     <li><a href="#">Another action</a></li>
                                     <li><a href="#">Something else here</a></li>
                                 </ul>
