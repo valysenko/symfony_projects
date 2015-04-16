@@ -1,0 +1,84 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+
+
+       {% if contract!=null %}
+            <div class="container" style="margin-top:50px;width:600px;border:1px solid #c3c3c3; border-radius:3px;">
+               <h3>Contract:</h3>
+               <table class="table panel-body">
+                   <thead>
+                   <tr>
+                       <th>Contract number</th>
+                       <th>Master</th>
+                       <th>Description</th>
+                       <th>Status</th>
+                       {% if contract.status!='in progress' %}
+                        <th>Price</th>
+                       {% endif %}
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <tr>
+                       <td>
+                           {{ contract.number }}
+                       </td>
+                       <td>
+                           {{ contract.master.firstName }}
+                           {{ contract.master.surname }}
+                       </td>
+
+                       <td>
+                           {{ contract.description }}
+                       </td>
+                       <td>
+                           {{ contract.status }}
+                       </td>
+                       {% if contract.status!='in progress' %}
+                           <td>
+                               {{ contract.sum }}
+                           </td>
+                       {% endif %}
+                   </tr>
+
+                   <tbody>
+               </table>
+                <h4>Made services:</h4>
+                <table id="mytable" class="table table-bordred table-striped">
+                    <thead>
+                    <th>Name</th>
+                    <th style="width:100px">Price</th>
+                    <th>Comment</th>
+                    </thead>
+                    <tbody>
+                    {% for service in contract.madeServices %}
+                        <tr>
+                                <td>{{ service.name }}</td>
+                                <td>{{ service.price }}</td>
+                                <td>{{ service.comment }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+       {% else %}
+           <div class="container" style="margin-top:50px;width:400px;border:1px solid #c3c3c3; border-radius:3px;">
+               <h3>Write your contract number:</h3>
+               <form action="{{ path('find_contract') }}" method="post" class="form-signin">
+                   <input type="hidden" name="_csrf_token"
+                          value="{{ csrf_token('authenticate') }}"
+                           >
+                   {% if error!=null %}
+                      <div class="alert alert-danger alert-error">
+                          {{ error }}
+                      </div>
+                   {% endif %}
+                   <input type="text"  name="number" class="form-control"  placeholder="Contract number" style="margin-bottom: 5px">
+                   <button class="btn " type="submit" style="margin-bottom: 10px">Find</button>
+               </form>
+           </div>
+       {% endif %}
+
+{% endblock %}
+

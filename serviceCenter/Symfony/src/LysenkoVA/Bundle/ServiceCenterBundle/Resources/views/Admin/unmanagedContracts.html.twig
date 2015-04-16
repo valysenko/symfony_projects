@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+    {#<div class="jumbotron">#}
+    <div class="container" style="margin-top:50px; border:1px solid #c3c3c3; border-radius:3px; margin-bottom:20px" >
+        <h1> Unmanaged contracts</h1>
+
+        <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th>Contract number</th>
+                    <th>Master</th>
+                    <th>Description</th>
+                    <th>Warranty</th>
+                    <th>Actions</th>
+            </thead>
+            <tbody>
+                {% for item in contracts %}
+                    <tr>
+                        <td>
+                        {{ item.number }}
+                        </td>
+                        <td>
+                            {{ item.master.firstName }}
+                            {{ item.master.surname }}
+                        </td>
+
+                        <td>
+                            {{ item.description }}
+                        </td>
+                        <td>
+                            {{ item.device.warranty }}
+                        </td>
+                        <td>
+                            <a href="/admin/contracts/add/{{item.id}}">
+                                    Add manager
+                             </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            <tbody>
+        </table>
+
+    </div>
+{% endblock %}
+

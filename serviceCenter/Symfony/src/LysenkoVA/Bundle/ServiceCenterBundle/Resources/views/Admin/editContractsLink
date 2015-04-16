@@ -1,0 +1,1 @@
+<li><a href="/admin/contract/{{ id }}">Edit contracts</a></li>

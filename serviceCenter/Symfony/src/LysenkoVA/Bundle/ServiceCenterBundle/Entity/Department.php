@@ -144,4 +144,9 @@ class Department
         $this->employees[] = $employee;
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->address;
+    }
 }

@@ -1,9 +1,49 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
-    {#<div class="jumbotron">#}
-        <h1> Welcome to our service center!</h1>
 
-    {#</div>#}
+    <div class="container" style="margin-bottom:25px;width:750px;padding-left:105px;padding-right:5px;">
+        <h3>Our departments</h3>
+
+        {% for department in departments %}
+            <div style="
+            width:250px;
+            background: #fa8072;
+            margin-right:50px;
+            margin-bottom:10px;
+            padding-top:30px;
+            padding-bottom: 30px;
+            float:left;
+            text-align:center;
+            background-color: #ddd;
+             /*border: 1px solid #dd6666;*/
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+             box-shadow: 0 0 40px rgba(0, 0, 0, .1) inset;
+            ">
+            <strong>{{ department }}</strong><br>
+                <a href="/complaint/create/{{ department.id }}">Write complaint</a><br>
+                <a href="/comlaints/{{ department.id }}">View complaints</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="container" style="width:600px;margin-bottom:50px;">
+        <h3>Our services</h3>
+        <ol class="rectangle-list">
+        {% for category in categories %}
+                <li>
+                    <span class="flip{{ loop.index }}"><strong >{{ category.name  }}</strong></span>
+                    <ol class='panel{{ loop.index }}' style="border:1px solid white">
+                    {% for service in category.services %}
+                            <li>
+                                <span>{{ service.name  }}   ({{ service.price  }} uah)</span>
+                            </li>
+                    {% endfor %}
+                    </ol>
+                </li>
+        {% endfor %}
+        </ol>
+    </div>
 {% endblock %}
 

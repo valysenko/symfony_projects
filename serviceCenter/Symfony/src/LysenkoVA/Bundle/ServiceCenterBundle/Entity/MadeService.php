@@ -3,7 +3,7 @@
 namespace LysenkoVA\Bundle\ServiceCenterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * MadeService
  *
@@ -28,37 +28,42 @@ class MadeService
      */
     private $name;
 
+
+
     /**
      * @var float
-     *
+     * @Assert\Range(min = "1", minMessage = "Price should be greater then 0.")
      * @ORM\Column(name="price", type="float")
      */
     private $price;
 
     /**
-     * @return Act
+     * @return Contract
      */
-    public function getAct()
+    public function getContract()
     {
-        return $this->act;
+        return $this->contract;
     }
 
     /**
-     * @param Act $act
+     * @param Contract $contract
      */
-    public function setAct($act)
+    public function setContract($contract)
     {
-        $this->act = $act;
+        $this->contract = $contract;
     }
 
     /**
-     * @var Act
-     * @ORM\ManyToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Act",inversedBy="madeServices")
+     * @var Contract
+     * @ORM\ManyToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Contract",inversedBy="madeServices")
+     *
      */
-    private $act;
+    private $contract;
+
 
     /**
      * @var string
+     * @ORM\Column(name="comment", nullable=true, type="string",length=120)
      */
     private $comment;
 

@@ -1,0 +1,72 @@
+{% extends '::base.html.twig' %}
+
+    {% block link %}
+        <li><a href="/admin/contract/{{ id }}">Edit contracts</a></li>
+    {% endblock %}
+
+{% block content %}
+
+    {#<div class="jumbotron">#}
+    <div class="container" style="margin-top:50px; border:1px solid #c3c3c3; border-radius:3px; margin-bottom:20px" >
+        {% if current %}
+            <h1> Curreent contract list</h1>
+        {% else %}
+            <h1> Contract list</h1>
+        {% endif %}
+        <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th>Contract number</th>
+                    <th>Master</th>
+                    <th>Description</th>
+                    <th>Warranty</th>
+                    <th>Sum</th>
+                    <th>Actions</th>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>
+                        {{ item.number }}
+                        </td>
+                        <td>
+                            {{ item.master.firstName }}
+                            {{ item.master.surname }}
+                        </td>
+
+                        <td>
+                            {{ item.description }}
+                        </td>
+                        <td>
+                            {{ item.device.warranty }}
+                        </td>
+                        <td>
+                            {{ item.sum}}
+                        </td>
+                        <td>
+                            {% if item.status == 'in progress' and manager  %}
+                                <a href="/admin/manager/finishWork/{{item.id}}">
+                                    Finish work
+                                </a>
+
+                            {% endif %}
+                            {% if item.status == 'in progress' and not manager  %}
+                                <a href="/admin/master/action/manage/{{item.id}}">
+                                    Manage
+                                </a>
+                            {% endif %}
+                            {% if item.status == 'finished work' and manager %}
+
+                                <a href="/admin/manager/finish/{{item.id}}">
+                                    Finish
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            <tbody>
+        </table>
+
+    </div>
+{% endblock %}
+

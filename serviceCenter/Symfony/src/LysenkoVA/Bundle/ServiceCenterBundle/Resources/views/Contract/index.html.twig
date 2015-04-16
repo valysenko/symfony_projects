@@ -1,0 +1,43 @@
+{% extends '::base.html.twig' %}
+
+    {% block link %}
+        <li><a href="/admin/contract/{{ id }}">Edit contracts</a></li>
+    {% endblock %}
+
+{% block content -%}
+
+    <div class="container">
+    <h1 >Contract list</h1>
+{#<div class="container" style="margin-top:50px; border:1px solid #c3c3c3; border-radius:3px; margin-bottom:20px" >#}
+    <table class="table table-striped custab">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Number</th>
+                <th>Description</th>
+                <th>Dateofend</th>
+                <th>Approximateprice</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('admin_contract_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.number }}</td>
+                <td>{{ entity.description }}</td>
+                 <td>{% if entity.dateOfEnd %}{{ entity.dateOfEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.approximatePrice }}</td>
+                <td>
+                <a href="{{ path('admin_contract_edit', { 'id': entity.id }) }}" class=".btn-link">edit</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            <a href="{{ path('admin_contract_new') }}">
+                Create a new contract
+            </a>
+    </div>
+    {% endblock %}

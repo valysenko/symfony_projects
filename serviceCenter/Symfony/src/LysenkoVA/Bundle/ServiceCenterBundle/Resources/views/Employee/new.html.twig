@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block content -%}
+<div class="container" style="width:400px;margin-top:30px; border:1px solid #c3c3c3; border-radius:3px; margin-bottom:30px">
+    <h1>Employee creation</h1>
+
+    {{ form(form) }}
+        <a href="{{ path('admin_employee') }}">
+            Back to the list
+        </a>
+    </div>
+{% endblock %}

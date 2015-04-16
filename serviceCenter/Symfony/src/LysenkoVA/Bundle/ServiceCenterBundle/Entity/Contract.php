@@ -4,14 +4,14 @@ namespace LysenkoVA\Bundle\ServiceCenterBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Contract
  *
  * @ORM\Table()
- * @ORM\Entity
+ *  @ORM\Entity(repositoryClass="LysenkoVA\Bundle\ServiceCenterBundle\Repository\ContractRepository")
  */
-class Contract
+class Contract 
 {
     /**
      * @var integer
@@ -45,7 +45,7 @@ class Contract
 
     /**
      * @var \DateTime
-     *
+     * @Assert\GreaterThanOrEqual("+1 day")
      * @ORM\Column(name="date_of_end", type="date")
      */
     private $dateOfEnd;
@@ -75,37 +75,96 @@ class Contract
 
     /**
      * @var float
-     *
+     * @Assert\Range(min = "1", minMessage = "Price should be greater then 0.")
      * @ORM\Column(name="approximate_price", type="float")
      */
     private $approximatePrice;
 
     /**
+     * ON DELETE SET NULL in database
      * @var Employee
-     * @ORM\ManyToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Employee",inversedBy="contracts")
+     * @ORM\ManyToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Employee",inversedBy="contractsManaged")
      */
-    private $employee;
+    private $manager;
 
     /**
-     * @var Act
-     * @ORM\OneToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Act",mappedBy="contract")
+     * @return Employee
      */
-    private $act;
-
-    /**
-     * @return Act
-     */
-    public function getAct()
+    public function getManager()
     {
-        return $this->act;
+        return $this->manager;
     }
 
     /**
-     * @param Act $act
+     * @param Employee $manager
      */
-    public function setAct($act)
+    public function setManager($manager)
     {
-        $this->act = $act;
+        $this->manager = $manager;
+    }
+
+    /**
+     * @return Employee
+     */
+    public function getMaster()
+    {
+        return $this->master;
+    }
+
+    /**
+     * @param Employee $master
+     */
+    public function setMaster($master)
+    {
+        $this->master = $master;
+    }
+
+    /**
+     * ON DELETE SET NULL in database
+     * @var Employee
+     * @ORM\ManyToOne(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Employee",inversedBy="contractsMasters", cascade={"detach"})
+     */
+    private $master;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\MadeService",mappedBy="contract",orphanRemoval=true)
+     */
+    private $madeServices;
+        /**
+     * @return ArrayCollection
+     */
+    public function getMadeServices()
+    {
+        return $this->madeServices;
+    }
+
+    /**
+     * @param ArrayCollection $madeServices
+     */
+    public function setMadeServices($madeServices)
+    {
+        $this->madeServices = $madeServices;
+    }
+
+    /**
+     * @param MadeService $madeService
+     * @return $this
+     */
+    public function addMadeService(MadeService $madeService)
+    {
+        $this->madeServices[] = $madeService;
+        return $this;
+    }
+
+    /**
+     * @param MadeService $madeService
+     * @return $this
+     */
+    public function removeMadeService(MadeService $madeService)
+    {
+        $this->madeServices->removeElement($madeService);
+        return $this;
     }
 
     /**
@@ -113,6 +172,29 @@ class Contract
      * @ORM\JoinColumn(name="device_id", referencedColumnName="id")
      **/
     private $device;
+
+    /**
+     * @var float
+     * @ORM\Column(name="sum", type="float")
+     */
+    private $sum;
+
+    /**
+     * @return float
+     */
+    public function getSum()
+    {
+        return $this->sum;
+    }
+
+    /**
+     * @param float $sum
+     */
+    public function setSum($sum)
+    {
+        $this->sum = $sum;
+    }
+
 
     /**
      * @return mixed
@@ -131,21 +213,6 @@ class Contract
     }
 
 
-    /**
-     * @return Employee
-     */
-    public function getEmployee()
-    {
-        return $this->employee;
-    }
-
-    /**
-     * @param Employee $employee
-     */
-    public function setEmployee($employee)
-    {
-        $this->employee = $employee;
-    }
 
     /**
      * Get id
@@ -166,7 +233,6 @@ class Contract
     public function setNumber($number)
     {
         $this->number = $number;
-
         return $this;
     }
 
@@ -219,7 +285,7 @@ class Contract
     /**
      * Get status
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {

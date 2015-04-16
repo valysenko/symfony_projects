@@ -21,22 +21,22 @@ class LoadUserData implements FixtureInterface, \Doctrine\Common\DataFixtures\Or
          * 1. Creating roles for all users(manager, master and admin)
          */
 
-        //role manager
-        $role_employee = new Role();
-        $role_employee->setName('ROLE_MANAGER');
-
-        //role master
-        $role_master = new Role();
-        $role_master->setName('ROLE_MASTER');
-
-        //role manager
-        $role_admin= new Role();
-        $role_admin->setName('ROLE_ADMIN');
-
-        $manager->persist($role_employee);
-        $manager->persist($role_master);
-        $manager->persist($role_admin);
-        $manager->flush();
+//        //role manager
+//        $role_employee = new Role();
+//        $role_employee->setName('ROLE_MANAGER');
+//
+//        //role master
+//        $role_master = new Role();
+//        $role_master->setName('ROLE_MASTER');
+//
+//        //role manager
+//        $role_admin= new Role();
+//        $role_admin->setName('ROLE_ADMIN');
+//
+//        $manager->persist($role_employee);
+//        $manager->persist($role_master);
+//        $manager->persist($role_admin);
+//        $manager->flush();
 
         /**
          * 2. Getting departments
@@ -61,7 +61,7 @@ class LoadUserData implements FixtureInterface, \Doctrine\Common\DataFixtures\Or
         $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
         $password = $encoder->encodePassword('1', $user->getSalt());
         $user->setPassword($password);
-        $user->addUserRole($role_employee);
+        $user->setRoles('ROLE_MANAGER');
         $manager->persist($user);
 
 
@@ -76,7 +76,7 @@ class LoadUserData implements FixtureInterface, \Doctrine\Common\DataFixtures\Or
         $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
         $password = $encoder->encodePassword('1', $user2->getSalt());
         $user2->setPassword($password);
-        $user2->addUserRole($role_employee);
+        $user2->setRoles('ROLE_MANAGER');
         $manager->persist($user2);
 
 
@@ -91,7 +91,7 @@ class LoadUserData implements FixtureInterface, \Doctrine\Common\DataFixtures\Or
         $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
         $password = $encoder->encodePassword('1', $user3->getSalt());
         $user3->setPassword($password);
-        $user3->addUserRole($role_master);
+        $user3->setRoles('ROLE_MASTER');
         $manager->persist($user3);
 
 
@@ -106,7 +106,7 @@ class LoadUserData implements FixtureInterface, \Doctrine\Common\DataFixtures\Or
         $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
         $password = $encoder->encodePassword('1', $user4->getSalt());
         $user4->setPassword($password);
-        $user4->addUserRole($role_master);
+        $user4->setRoles('ROLE_MASTER');
         $manager->persist($user4);
 
         //manager 1 (department 2)
@@ -120,7 +120,7 @@ class LoadUserData implements FixtureInterface, \Doctrine\Common\DataFixtures\Or
         $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
         $password = $encoder->encodePassword('1', $user5->getSalt());
         $user5->setPassword($password);
-        $user5->addUserRole($role_employee);
+        $user5->setRoles('ROLE_MANAGER');
         $manager->persist($user5);
 
 
@@ -135,7 +135,7 @@ class LoadUserData implements FixtureInterface, \Doctrine\Common\DataFixtures\Or
         $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
         $password = $encoder->encodePassword('1', $user6->getSalt());
         $user6->setPassword($password);
-        $user6->addUserRole($role_employee);
+        $user6->setRoles('ROLE_MANAGER');
         $manager->persist($user6);
 
 
@@ -150,7 +150,7 @@ class LoadUserData implements FixtureInterface, \Doctrine\Common\DataFixtures\Or
         $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
         $password = $encoder->encodePassword('1', $user7->getSalt());
         $user7->setPassword($password);
-        $user7->addUserRole($role_master);
+        $user7->setRoles('ROLE_MASTER');
         $manager->persist($user7);
 
 
@@ -165,7 +165,7 @@ class LoadUserData implements FixtureInterface, \Doctrine\Common\DataFixtures\Or
         $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
         $password = $encoder->encodePassword('1', $user8->getSalt());
         $user8->setPassword($password);
-        $user8->addUserRole($role_master);
+        $user8->setRoles('ROLE_MASTER');
         $manager->persist($user8);
 
 
@@ -184,7 +184,7 @@ class LoadUserData implements FixtureInterface, \Doctrine\Common\DataFixtures\Or
         $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
         $password = $encoder->encodePassword('1', $userAdmin->getSalt());
         $userAdmin->setPassword($password);
-        $userAdmin->addUserRole($role_admin);
+        $userAdmin->setRoles('ROLE_ADMIN');
         $manager->persist($userAdmin);
 
 

@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+    {% block link %}
+        <li><a href="/admin/contract/{{ id }}">Edit contracts</a></li>
+    {% endblock %}
+
+
+{% block content %}
+
+    {#<h1>Client creation</h1>#}
+    {#{{ form(client_form) }}#}
+
+    {#<h1>Device creation</h1>#}
+    {#{{ form(device_form) }}#}
+
+
+    {#{{ form_start(contract_form) }}#}
+       {#Number: {{ form_widget(contract_form.number) }}<br>#}
+       {#Description: {{ form_widget(contract_form.description) }}<br>#}
+       {#Status: {{ form_widget(contract_form.status) }}<br>#}
+       {#End date: {{ form_widget(contract_form.dateOfEnd) }}<br>#}
+       {#Approximate price {{ form_widget(contract_form.approximatePrice) }}<br>#}
+    {#<br><br>#}
+    {#{{ form_end(contract_form) }}#}
+    <div class="container" style="margin-bottom:25px;width:400px;border:1px solid #c3c3c3; border-radius:3px;">
+        <h1>Contract creation</h1>
+    {{ form(contract_form) }}
+    </div>
+
+{% endblock %}

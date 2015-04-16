@@ -83,6 +83,15 @@ class Client
     }
 
     /**
+     * Add device
+     */
+    public function addDevice(Device $device)
+    {
+        $this->devices[] = $device;
+      //  return $this;
+    }
+
+    /**
      * Set firstName
      *
      * @param string $firstName
@@ -175,4 +184,6 @@ class Client
     {
         return $this->email;
     }
+
+
 }

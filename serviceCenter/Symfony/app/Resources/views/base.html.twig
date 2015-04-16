@@ -2,7 +2,6 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <title>Service center</title>
@@ -10,17 +9,74 @@
         <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}"/>
         <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-theme.css') }}"/>
         <link rel="stylesheet" href="{{ asset('bundles/lysenkovaservicecenter/css/style.css') }}"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>
+        <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
+        {#<script src="{{ asset('web/jquery/jquery-2.0.3.min.js') }}"></script>#}
+        <script>
+            $(document).ready(function(){
+                $(".flip1").click(function(){
+                    $(".panel1").slideToggle("slow");
+                });
+            })
+            $(document).ready(function(){
+                $(".flip2").click(function(){
+                    $(".panel2").slideToggle("slow");
+                });
+            })
+            $(document).ready(function(){
+                $(".flip3").click(function(){
+                    $(".panel3").slideToggle("slow");
+                });
+            })
+
+            $(function () {
+                $( '#table' ).searchable({
+                    striped: true,
+                    oddRow: { 'background-color': '#f5f5f5' },
+                    evenRow: { 'background-color': '#fff' },
+                    searchType: 'fuzzy'
+                });
+
+                $( '#searchable-container' ).searchable({
+                    searchField: '#container-search',
+                    selector: '.row',
+                    childSelector: '.col-xs-4',
+                    show: function( elem ) {
+                        elem.slideDown(100);
+                    },
+                    hide: function( elem ) {
+                        elem.slideUp( 100 );
+                    }
+                })
+            });
+
+        </script>
+
+        <style>
+            .panel, .flip {
+                /*padding: 5px;*/
+                /*text-align: center;*/
+                /*background-color: #e5eecc;*/
+                /*border: solid 1px #c3c3c3;*/
+            }
+
+            .panel1, .panel2,.panel3{
+                /*padding: 50px;*/
+                display: none;
+            }
+        </style>
     </head>
     <body>
 
         {% block body %}
             {% block menu %}
-                <nav class="navbar navbar-default navbar-static-top">
-                    <div class="navbar-header">
-                        {% if is_granted('ROLE_MANAGER') %}
-                            <a class="navbar-brand" href="/admin">Service center</a>
+                <nav class="navbar navbar-default navbar-static-top ">
+                    <div class="navbar-header" style="color:#28a4c9">
+                        {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_MASTER')  or is_granted('ROLE_ADMIN') %}
+                            <a style="color:#28a4c9" class="navbar-brand" href="/admin">Service center</a>
                         {%else %}
-                            <a class="navbar-brand" href="/">Service center</a>
+                            <a style="color:#28a4c9;" class="navbar-brand" href="/">Service center</a>
                         {% endif %}
                     </div>
                     <div>
@@ -32,22 +88,25 @@
                                 <li><a href="/">Home</a></li>
                             {% endif %}
 
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Services</a></li>
+                            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <li><a href="/find">Find contract</a></li>
+                            {% endif %}
                         </ul>
 
-                        {% if is_granted('ROLE_MANAGER') %}
+                        {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_MASTER') or is_granted('ROLE_ADMIN')%}
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Statistics <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">One more separated link</a></li>
+                                    {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_MASTER') %}
+                                        <li><a href="/admin">All my contracts</a></li>
+                                        <li><a href="/admin/money">All earned money</a></li>
+                                    {% endif %}
+                                    {#{% if is_granted('ROLE_ADMIN') %}#}
+                                        {#<li><a href="#">Add complaints</a></li>#}
+                                        {#<li><a href="#">All earned money by masters</a></li>#}
+                                        {#<li><a href="#">All earned money by managers</a></li>#}
+                                    {#{% endif %}#}
                                 </ul>
                             </li>
                         </ul>
@@ -56,29 +115,55 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Actions <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     {% if is_granted('ROLE_ADMIN') %}
-                                    <li><a href="#">Add employee</a></li>
+                                         {#<li><a href="#">Add employee</a></li>#}
+                                         {#<li><a href="#">Add department</a></li>#}
                                     {% endif %}
-                                    <li><a href="/admin/contract/new">Create contract</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
+
+                                    {% if is_granted('ROLE_MANAGER') %}
+                                         <li><a href="/admin/contract/new">Create contract</a></li>
+
+
+                                            {% block link %}
+                                            {% endblock %}
+                                    {% endif %}
+
                                 </ul>
                             </li>
                         </ul>
                         {% endif %}
-                        <ul class="nav navbar-nav navbar-right">
+
+                        {% if is_granted('ROLE_MANAGER')%}
+                             <ul class="nav navbar-nav">
+                                 <li>
+                                     <a href="/admin/contracts/current">Current contracts</a>
+                                 </li>
+                             </ul>
+                        {% endif %}
+
+                        {% if is_granted('ROLE_MASTER')%}
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a href="/admin/master/contracts/current">Current contracts</a>
+                                </li>
+                            </ul>
+                        {% endif %}
+
+                        <ul class="nav navbar-nav navbar-right" >
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <li>
-                                {{ app.user.username }}
+                            <li style="color:mediumseagreen; padding-top: 15px;padding-bottom: 10px;line-height: 20px;">
+                              {{ app.user.username }}
                             </li>
-                            <li>
-                                <a href="{{ path('logout') }}" style="color:red;text-decoration: none">
-                                        Log out
+                            <li style="padding-right: 10px">
+                                <a href="{{ path('logout') }}" style="color:#dd6666;text-decoration: none">
+                                        Logout
                                 </a>
                             </li>
                             {% else %}
-                                    <li><a href="/login">Sign in</a></li>
+                                    <li style=" padding-right: 15px;"><a href="/login"  style="color:mediumseagreen">Sign in</a></li>
                             {% endif %}
                         </ul>
+
+
                     </div>
                     </div>
                 </nav>
@@ -89,15 +174,16 @@
             {% endblock %}
 
             {% block footer %}
-                <div class="footer">
-                    Copyright 2015 © - Lysenko V.A.
+                <div class="footer navbar-fixed-bottom">
+                    <div class="panel-footer" style="color:mediumseagreen">Copyright 2015 © - Lysenko V.A.</div>
                 </div>
             {% endblock %}
         {% endblock %}
 
         {% block javascripts %}
-            {% javascripts 'jquery/jquery-2.0.3.min.js'
-            'bootstrap/js/bootstrap.js'%}
+            {% javascripts
+                './web/jquery/jquery-2.0.3.min.js'
+                './web/bootstrap/js/bootstrap.js'%}
             <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}

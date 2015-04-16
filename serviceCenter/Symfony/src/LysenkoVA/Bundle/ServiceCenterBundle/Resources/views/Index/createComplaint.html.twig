@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+    <div class="container" style="width:400px;border:1px solid #c3c3c3; border-radius:3px;">
+        <h3>Write a complaint on department:</h3>
+        <h5> {{ department.address }}</h5>
+        {{ form(form) }}
+    </div>
+{% endblock %}
+

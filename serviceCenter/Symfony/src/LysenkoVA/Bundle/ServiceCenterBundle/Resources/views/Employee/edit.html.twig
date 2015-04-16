@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block content -%}
+    <div class="container" style="width:400px;margin-top:30px; border:1px solid #c3c3c3; border-radius:3px; margin-bottom:30px">
+    <h1>Employee edition</h1>
+
+        {{ form(edit_form) }}
+        {#{{ form_start(edit_form) }}#}
+        {#{{ form_errors(edit_form) }}#}
+
+        {#<div>#}
+            {#{{ form_label(edit_form.firstName) }}#}
+            {#{{ form_errors(edit_form.firstName) }}#}
+            {#{{ form_widget(edit_form.firstName) }}#}
+        {#</div>#}
+
+        {#<div>#}
+            {#{{ form_label(edit_form.surname) }}#}
+            {#{{ form_errors(edit_form.surname) }}#}
+            {#{{ form_widget(edit_form.surname) }}#}
+        {#</div>#}
+
+        {#<div>#}
+            {#{{ form_label(edit_form.username) }}#}
+            {#{{ form_errors(edit_form.username) }}#}
+            {#{{ form_widget(edit_form.username) }}#}
+        {#</div>#}
+
+        {#<div>#}
+            {#{{ form_label(edit_form.telephoneNumber) }}#}
+            {#{{ form_errors(edit_form.telephoneNumber) }}#}
+            {#{{ form_widget(edit_form.telephoneNumber) }}#}
+        {#</div>#}
+
+        {#<div>#}
+            {#{{ form_label(edit_form.department) }}#}
+            {#{{ form_errors(edit_form.department) }}#}
+            {#{{ form_widget(edit_form.department) }}#}
+        {#</div>#}
+
+        {#&#123;&#35;<div>&#35;&#125;#}
+             {#&#123;&#35;{{ form_widget(edit_form.roles, { 'attr': {'type': 'hidden'} }) }}&#35;&#125;#}
+        {#&#123;&#35;</div>&#35;&#125;#}
+
+        {#{{ form_end(edit_form) }}#}
+
+
+    {{ form(delete_form) }}
+
+
+
+    </div>
+{% endblock %}

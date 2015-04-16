@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Contract</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ entity.number }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+
+            <tr>
+                <th>Dateofend</th>
+                <td>{{ entity.dateOfEnd|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Approximateprice</th>
+                <td>{{ entity.approximatePrice }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_contract', {'id': id})  }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_contract_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

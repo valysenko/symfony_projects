@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+    {#<div class="jumbotron">#}
+    <div class="container" style="margin-top:50px; border:1px solid #c3c3c3; border-radius:3px; margin-bottom:20px" >
+
+        <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th>Contract number</th>
+                    <th>Master</th>
+                    <th>Description</th>
+            </thead>
+            <tbody>
+                {% for item in result %}
+                    <tr>
+                        <td>
+                        {{ item.sum }}
+                        </td>
+                        <td>
+                            {{ item.firstName }}
+                        </td>
+
+                        <td>
+                            {{ item.surname }}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            <tbody>
+        </table>
+
+    </div>
+{% endblock %}
+

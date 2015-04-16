@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+    {% block link %}
+        <li><a href="/admin/contract/{{ id }}">Edit contracts</a></li>
+    {% endblock %}
+
+{% block content -%}
+    {#{% block bb %}#}
+        {#<li><a href="/admin/contract/{{ id }}">Edit contracts</a></li>#}
+    {#{% endblock %}#}
+    <div class="container" style="margin-bottom:50px;width:400px;border:1px solid #c3c3c3; border-radius:3px;">
+        <h1>Contract edit</h1>
+
+        {{ form(edit_form) }}
+
+        {#{{ form_start(edit_form) }}#}
+            {#{{ form_errors(edit_form) }}#}
+
+        {#<div>#}
+            {#{{ form_label(edit_form.description) }}#}
+            {#{{ form_errors(edit_form.description) }}#}
+            {#{{ form_widget(edit_form.description) }}#}
+        {#</div>#}
+
+        {#<div>#}
+            {#{{ form_label(edit_form.dateOfEnd) }}#}
+            {#{{ form_errors(edit_form.dateOfEnd) }}#}
+            {#{{ form_widget(edit_form.dateOfEnd) }}#}
+        {#</div>#}
+
+        {#<div>#}
+            {#{{ form_label(edit_form.approximatePrice) }}#}
+            {#{{ form_errors(edit_form.approximatePrice) }}#}
+            {#{{ form_widget(edit_form.approximatePrice) }}#}
+        {#</div>#}
+
+        {#<div>#}
+            {#{{ form_label(edit_form.device) }}#}
+            {#{{ form_errors(edit_form.device) }}#}
+            {#{{ form_widget(edit_form.device) }}#}
+        {#</div>#}
+
+
+        {#{{ form_end(edit_form) }}#}
+
+
+        {{ form(delete_form) }}
+
+
+        <a href="{{ path('admin_contract', {'id': id}) }}">
+            Back to the list
+        </a>
+
+    </div>
+{% endblock %}

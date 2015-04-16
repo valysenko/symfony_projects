@@ -1,0 +1,13 @@
+services:
+    form_service:
+        class: LysenkoVA\Bundle\ServiceCenterBundle\Services\FormService
+        arguments: [@form.factory, @router]
+    contract_service:
+        class: LysenkoVA\Bundle\ServiceCenterBundle\Services\Contract\ContractService
+        arguments: [@form.factory, @router]
+    client_service:
+            class: LysenkoVA\Bundle\ServiceCenterBundle\Services\Client\ClientService
+            arguments: [@form.factory, @router]
+    device_service:
+            class: LysenkoVA\Bundle\ServiceCenterBundle\Services\Device\DeviceService
+            arguments: [@form.factory, @router]

@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+    {% block link %}
+        <li><a href="/admin/contract/{{ id }}">Edit contracts</a></li>
+    {% endblock %}
+
+{% block content %}
+    <div class="container" style="text-align:center">
+        <h2>Money for all contracts is:</h2>
+        <h1>  {{ sum }} </h1>  <h2>UAH</h2>
+    </div>
+{% endblock %}
+

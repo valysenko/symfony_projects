@@ -11,10 +11,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Employee
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="LysenkoVA\Bundle\ServiceCenterBundle\Repository\EmployeeRepository")
  */
 class Employee implements UserInterface, \Serializable
 {
+
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>
      * String representation of object
@@ -25,7 +26,8 @@ class Employee implements UserInterface, \Serializable
     {
         return \json_encode(
             array($this->username, $this->password, $this->salt,
-                $this->userRoles, $this->id,$this->contracts,
+                $this->roles, $this->id,$this->contractsManaged,
+                $this->contractsMasters,
                 $this->department,$this->firstName,$this->surname,
                 $this->telephoneNumber));
     }
@@ -42,32 +44,34 @@ class Employee implements UserInterface, \Serializable
     public function unserialize($serialized)
     {
         list($this->username, $this->password, $this->salt,
-            $this->userRoles, $this->id,$this->contracts,
+            $this->roles, $this->id,$this->contractsManaged,
+            $this->contractsMasters,
             $this->department,$this->firstName,$this->surname,
             $this->telephoneNumber) = \json_decode(
             $serialized);
     }
 
+
     /**
-     * Returns the roles granted to the user.
-     *
-     * <code>
-     * public function getRoles()
-     * {
-     *     return array('ROLE_USER');
-     * }
-     * </code>
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
      * @return Role[] The user roles
      */
     public function getRoles()
     {
-        return $this->getUserRoles()->toArray();
+        return array($this->roles);
     }
+
+    public function setRoles($role)
+    {
+        $this->roles = $role;
+    }
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     */
+    private $roles;
+
+
 
     /**
      * Removes sensitive data from the user.
@@ -89,21 +93,21 @@ class Employee implements UserInterface, \Serializable
      */
     private $id;
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getUserRoles()
-    {
-        return $this->userRoles;
-    }
-
-    /**
-     * @param ArrayCollection $userRoles
-     */
-    public function setUserRoles($userRoles)
-    {
-        $this->userRoles = $userRoles;
-    }
+//    /**
+//     * @return ArrayCollection
+//     */
+//    public function getUserRoles()
+//    {
+//        return $this->userRoles;
+//    }
+//
+//    /**
+//     * @param ArrayCollection $userRoles
+//     */
+//    public function setUserRoles($userRoles)
+//    {
+//        $this->userRoles = $userRoles;
+//    }
 
     /**
      * @var string
@@ -142,16 +146,63 @@ class Employee implements UserInterface, \Serializable
      */
     private $salt;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Role")
-     * @ORM\JoinTable(name="user_role",
-     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
-     * )
-     *
-     * @var ArrayCollection $userRoles
-     */
-    protected $userRoles;
+
+
+//
+//    function __construct($roles)
+//    {
+//        $this->roles = $roles;
+//    }
+
+//    /**
+//     * @var Role
+//     * @ORM\ManyToOne(targetEntity="Role", inversedBy="users")
+//     *
+//     **/
+//    private $role;
+//
+//    /**
+//     * Returns the roles granted to the user.
+//     *
+//     * <code>
+//     * public function getRoles()
+//     * {
+//     *     return array('ROLE_USER');
+//     * }
+//     * </code>
+//     *
+//     * Alternatively, the roles might be stored on a ``roles`` property,
+//     * and populated in any number of different ways when the user object
+//     * is created.
+//     *
+//     * @return Role[] The user roles
+//     */
+//    public function getRoles()
+//    {
+//        $ac = new ArrayCollection();
+//        $ac->add($this->role);
+//        return $ac->toArray();
+//    }
+
+
+//    /**
+//     * @param mixed $role
+//     */
+//    public function setRole($role)
+//    {
+//        $this->role = $role;
+//    }
+
+//    /**
+//     * @ORM\ManyToMany(targetEntity="Role")
+//     * @ORM\JoinTable(name="user_role",
+//     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+//     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+//     * )
+//     *
+//     * @var ArrayCollection $userRoles
+//     */
+//    protected $userRoles;
 
     /**
      * @return string
@@ -174,7 +225,7 @@ class Employee implements UserInterface, \Serializable
      * Set salt
      *
      * @param string $salt
-     * @return User
+     * @return Employee
      */
     public function setSalt($salt)
     {
@@ -216,7 +267,6 @@ class Employee implements UserInterface, \Serializable
      */
     private $telephoneNumber;
 
-
     /**
      * @return Department
      */
@@ -241,27 +291,47 @@ class Employee implements UserInterface, \Serializable
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Contract",mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Contract",mappedBy="manager")
      */
-    private $contracts;
+    private $contractsManaged;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="LysenkoVA\Bundle\ServiceCenterBundle\Entity\Contract",mappedBy="master")
+     */
+    private $contractsMasters;
 
     /**
      * @return ArrayCollection
      */
-    public function getContracts()
+    public function getContractsManaged()
     {
-        return $this->contracts;
+        return $this->contractsManaged;
     }
 
     /**
-     * @param ArrayCollection $contracts
+     * @param ArrayCollection $contractsManaged
      */
-    public function setContracts($contracts)
+    public function setContractsManaged($contractsManaged)
     {
-        $this->contracts = $contracts;
+        $this->contractsManaged = $contractsManaged;
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getContractsMasters()
+    {
+        return $this->contractsMasters;
+    }
 
+    /**
+     * @param ArrayCollection $contractsMasters
+     */
+    public function setContractsMasters($contractsMasters)
+    {
+        $this->contractsMasters = $contractsMasters;
+    }
 
 
     /**
@@ -345,14 +415,14 @@ class Employee implements UserInterface, \Serializable
         return $this->telephoneNumber;
     }
 
-    /**
-     * Add userRoles
-     */
-    public function addUserRole(Role $userRoles)
-    {
-        $this->userRoles[] = $userRoles;
-        return $this;
-    }
+//    /**
+//     * Add userRoles
+//     */
+//    public function addUserRole(Role $userRoles)
+//    {
+//        $this->userRoles[] = $userRoles;
+//        return $this;
+//    }
 
     public function __toString()
     {
