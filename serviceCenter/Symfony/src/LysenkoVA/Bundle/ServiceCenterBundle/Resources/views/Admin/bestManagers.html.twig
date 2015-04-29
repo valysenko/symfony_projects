@@ -8,9 +8,9 @@
         <table class="table table-striped custab">
             <thead>
                 <tr>
-                    <th>Contract number</th>
-                    <th>Master</th>
-                    <th>Description</th>
+                    <th>Sum</th>
+                    <th>Name</th>
+                    <th>Surname</th>
             </thead>
             <tbody>
                 {% for item in result %}
@@ -31,6 +31,11 @@
             <tbody>
         </table>
 
+        <a href = "/admin/bestmanagers/{{id}}">
+            download best managers lit
+        </a>
+
     </div>
+
 {% endblock %}
 

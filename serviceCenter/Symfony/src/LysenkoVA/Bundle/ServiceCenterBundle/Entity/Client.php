@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="LysenkoVA\Bundle\ServiceCenterBundle\Repository\ClientRepository")
  */
 class Client
 {

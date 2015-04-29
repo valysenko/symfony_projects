@@ -81,7 +81,7 @@
                     </div>
                     <div>
                         <ul class="nav navbar-nav">
-                            {% if is_granted('ROLE_MANAGER') %}
+                            {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_MASTER')  or is_granted('ROLE_ADMIN') %}
                                 <li><a href="/admin">Home</a></li>
 
                             {%else %}
@@ -93,7 +93,7 @@
                             {% endif %}
                         </ul>
 
-                        {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_MASTER') or is_granted('ROLE_ADMIN')%}
+                        {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_MASTER')%}
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Statistics <span class="caret"></span></a>
@@ -101,32 +101,24 @@
                                     {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_MASTER') %}
                                         <li><a href="/admin">All my contracts</a></li>
                                         <li><a href="/admin/money">All earned money</a></li>
+                                        {% if is_granted('ROLE_MANAGER')%}
+                                            <li><a href="/admin/clients">Clients who has more than 2 services in contract </a></li>
+                                            <li><a href="/admin/services/list">Masters services </a></li>
+                                        {% endif %}
                                     {% endif %}
-                                    {#{% if is_granted('ROLE_ADMIN') %}#}
-                                        {#<li><a href="#">Add complaints</a></li>#}
-                                        {#<li><a href="#">All earned money by masters</a></li>#}
-                                        {#<li><a href="#">All earned money by managers</a></li>#}
-                                    {#{% endif %}#}
                                 </ul>
                             </li>
                         </ul>
+                        {% endif %}
+
+                        {% if is_granted('ROLE_MANAGER')%}
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Actions <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                         {#<li><a href="#">Add employee</a></li>#}
-                                         {#<li><a href="#">Add department</a></li>#}
-                                    {% endif %}
-
-                                    {% if is_granted('ROLE_MANAGER') %}
                                          <li><a href="/admin/contract/new">Create contract</a></li>
-
-
                                             {% block link %}
                                             {% endblock %}
-                                    {% endif %}
-
                                 </ul>
                             </li>
                         </ul>

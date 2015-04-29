@@ -19,9 +19,7 @@ class EmployeeRepository  extends EntityRepository{
     public function findMastersFromDepartment(Department $department){
         $roles = new ArrayCollection();
         $roles->add('ROLE_MASTER');
-
         $query =  $this->getEntityManager()
-
             ->createQuery(
                 'SELECT e
                   FROM LysenkoVAServiceCenterBundle:Employee e
@@ -65,13 +63,13 @@ class EmployeeRepository  extends EntityRepository{
                 'SELECT empl
                   FROM LysenkoVAServiceCenterBundle:Employee empl,
                        LysenkoVAServiceCenterBundle:Contract contr,
-                       LysenkoVAServiceCenterBundle:MadeService mS,
+                       LysenkoVAServiceCenterBundle:MadeService mS
                   WHERE empl = contr.master
                    AND mS.contract=contr
                    AND empl.department = :department
                    AND mS NOT IN ( SELECT madeS
                                     FROM LysenkoVAServiceCenterBundle:MadeService madeS
-                                    WHERE madeS = :name)
+                                    WHERE madeS != :name)
                   GROUP BY empl
                 ');
 
@@ -81,6 +79,32 @@ class EmployeeRepository  extends EntityRepository{
                 'name'=>$madeService->getName()
             ));
         return  $query->getResult();
-
     }
+
+    public function getAllMastersWhoMadeSomeServiceInDepartment($department, Service $madeService){
+
+        $query =  $this->getEntityManager()
+            ->createQuery(
+                'SELECT empl
+                  FROM LysenkoVAServiceCenterBundle:Contract contract,
+                       LysenkoVAServiceCenterBundle:Employee empl,
+                       LysenkoVAServiceCenterBundle:MadeService mS
+                  WHERE empl = contract.master
+                  AND empl.department = :department
+                  AND mS.contract = contract
+                  AND mS IN (SELECT madeS
+                             FROM LysenkoVAServiceCenterBundle:MadeService madeS
+                             WHERE madeS.name = :name )
+                  GROUP BY empl
+                  ');
+        $query->setParameters(
+            array(
+                'department'=>$department,
+                'name'=>$madeService->getName()
+            )
+        );
+
+        return $query->getResult();
+    }
+
 }

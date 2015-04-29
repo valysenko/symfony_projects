@@ -1,0 +1,31 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+    {#<div class="jumbotron">#}
+    <div class="container" style="width:500px; margin-top:50px; border:1px solid #c3c3c3; border-radius:3px; margin-bottom:20px" >
+        <h3> Clients who has more than 2 services in contract </h3>
+        <table class="table table-striped custab">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+            </thead>
+            <tbody>
+            {% for item in clients %}
+                <tr>
+                    <td>
+                        {{ item.firstName }}
+                    </td>
+                    <td>
+                        {{ item.surname }}
+                    </td>
+
+                </tr>
+            {% endfor %}
+            <tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

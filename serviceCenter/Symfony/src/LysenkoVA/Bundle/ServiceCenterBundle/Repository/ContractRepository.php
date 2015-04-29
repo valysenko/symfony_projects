@@ -100,7 +100,7 @@ class ContractRepository extends EntityRepository{
     }
 
     public function getSumOfEmployeesOfDepartment($department){
-       // if($employee=='manager'){
+
             $query =  $this->getEntityManager()
                 ->createQuery(
                     'SELECT empl.firstName, empl.surname, SUM(contract.sum) AS summ
@@ -111,17 +111,6 @@ class ContractRepository extends EntityRepository{
                   GROUP BY empl.firstName, empl.surname
                   ORDER BY summ DESC
                   ');
-    //    }
-//        else{
-//            $query =  $this->getEntityManager()
-//                ->createQuery(
-//                    'SELECT empl.firstName, empl.surname, SUM(contract.sum) AS summ
-//                  FROM LysenkoVAServiceCenterBundle:Contract contract,
-//                       LysenkoVAServiceCenterBundle:Employee empl
-//                  WHERE empl = contract.master
-//                  GROUP BY empl.firstName, empl.surname
-//                  ');
-//        }
         $query->setParameter('department',$department);
 
         $result = [];

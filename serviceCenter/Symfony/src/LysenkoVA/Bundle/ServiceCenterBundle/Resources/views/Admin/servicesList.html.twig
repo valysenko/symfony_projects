@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+    {#<div class="jumbotron">#}
+    <div class="container" style="width:600px;margin-top:50px; border:1px solid #c3c3c3; border-radius:3px; margin-bottom:20px" >
+        <h3> Choose a service to see which manager made this  </h3>
+        {% for category in categories %}
+            <div id="flip">
+                <h4> {{ category.name }} </h4>
+            </div>
+            <div id="panel">
+
+                {% for service in category.services %}
+                    <ul>
+                       <li> {{ service.name }}
+                        <a href="/admin/master/service/{{service.id}}">more than this </a> |
+                        <a href="/admin/master/service/only/{{service.id}}">only this </a> </li>
+                    </ul>
+
+                {% endfor %}
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

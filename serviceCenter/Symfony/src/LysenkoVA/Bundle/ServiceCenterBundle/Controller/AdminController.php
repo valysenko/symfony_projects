@@ -140,6 +140,7 @@ class AdminController extends Controller{
             ->getSumOfEmployeesOfDepartment($department);
         return array(
             'result' => $result,
+            'id'=>$id,
         );
     }
 
@@ -337,16 +338,83 @@ class AdminController extends Controller{
     }
 
     /**
-     * @Route("/admin/manager/finishWorddk/{contractId}", name="finishWork_contract3")
-     * @Template("LysenkoVAServiceCenterBundle:Admin:mastersByService.html.twig")
+     * @Route("/admin/clients", name="manager_clients")
+     * @Template("LysenkoVAServiceCenterBundle:Admin:clients.html.twig")
      */
-    public function mastersByServiceAction(){
-
+    public function clientsByManagerAction(){
         //getting logged user id
         $user = $this->get('security.context')->getToken()->getUser();
 
-        return array();
+        $em = $this->getDoctrine()->getManager();
+        $clients = $em->getRepository('LysenkoVAServiceCenterBundle:Client')
+            ->getClientsOfManagerMoreThanTwoServices($user);
+
+        return array(
+            'clients'=>$clients
+        );
     }
+
+
+
+    /**
+     * @Route("/admin/services/list", name="services_list")
+     * @Template("LysenkoVAServiceCenterBundle:Admin:servicesList.html.twig")
+     */
+    public function servicesListAction(){
+        //getting logged user id
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $categories =  $em->getRepository('LysenkoVAServiceCenterBundle:Category')->findAll();
+
+        return array(
+            'categories'=>$categories
+        );
+    }
+
+    /**
+     * @Route("/admin/master/service/{id}", name="masters_by_service")
+     * @Template("LysenkoVAServiceCenterBundle:Admin:managers.html.twig")
+     */
+    public function mastersByServiceAction($id){
+        //getting logged user id
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+
+
+        $service = $em->getRepository('LysenkoVAServiceCenterBundle:Service')->find($id);
+        $masters = $em->getRepository('LysenkoVAServiceCenterBundle:Employee')
+            ->getAllMastersWhoMadeSomeServiceInDepartment($user->getDepartment(),$service);
+
+        return array(
+            'clients'=>$masters
+        );
+    }
+
+
+    /**
+     * @Route("/admin/master/service/only/{id}", name="masters_by_only_service")
+     * @Template("LysenkoVAServiceCenterBundle:Admin:managers.html.twig")
+     */
+    public function mastersByOnlyOneServiceAction($id){
+        //getting logged user id
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $service = $em->getRepository('LysenkoVAServiceCenterBundle:Service')->find($id);
+
+        $clients = $em->getRepository('LysenkoVAServiceCenterBundle:Employee')
+            ->getEmployeeByServiceAndDepartment($user->getDepartment(),$service);
+
+        return array(
+            'clients'=>$clients
+        );
+    }
+
+
 
 
 }
